@@ -7,7 +7,7 @@ header('Content-Type: text/plain');
 $words = json_decode(file_get_contents('data/words.json'), true);
 
 // Initialize URL generator
-$urlgen = new UrlGenerator\UrlGenerator($words);
+$urlgen = new RobThree\UrlGenerator\UrlGenerator($words);
 
 // Generate some random id, convert that to a url and then decode it back.
 $randomid = rand(0,9999999);
