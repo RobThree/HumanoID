@@ -11,13 +11,6 @@ class UrlGeneratorTests extends TestCase
         'animals' => ['dog', 'cat', 'hamster']
     ];
     
-    /**
-     * @expectedException \UrlGenerator\UrlGeneratorException
-     */
-    public function testConstructorThrowsOnNoWords() {
-        new UrlGenerator\UrlGenerator([]);
-    }
-    
      public function testTestVectors() {
         $target = new UrlGenerator\UrlGenerator($this->defaultWordSet);
         $this->assertSame('dog',     $target->toUrl(0));

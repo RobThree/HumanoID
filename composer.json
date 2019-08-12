@@ -1,0 +1,20 @@
+{
+    "name": "RobThree/UrlGenerator",
+    "description": "Generate friendly URLs",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "RobIII",
+            "email": "email@example.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "RobThree\\UrlGenerator\\": "src/"
+        }
+    }
+}
