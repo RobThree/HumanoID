@@ -34,7 +34,7 @@ class UrlGenerator {
                 throw new UrlGeneratorException(sprintf('Category "%s" not found in datafile, category is not an array or category is an empty array', $k));
 
             // Ensure unique, normalized, values (make sure we use array_values, because array_unique will preserve the 'key' which is our index, causing missig indices on duplicate values)
-            $this->data[$k] = array_values(array_unique(array_map(function($s) { return trim(strtolower($s)); }, $this->data[$k])));
+            $this->data[$k] = array_values(array_unique(array_map(function($s) { return strtolower(trim($s)); }, $this->data[$k])));
 
             // Initialize lookup structure; add all words to our lookup
             $this->lookup[$k] = [];
@@ -45,7 +45,7 @@ class UrlGenerator {
         // Set other properties
         $this->separator = $separator;
         
-        $format = trim(strtolower($format ?? ''));
+        $format = strtolower(trim($format ?? ''));
         switch ($format) {
             case '':
             case 'ucfirst':
@@ -109,7 +109,7 @@ class UrlGenerator {
         return $this->data[$this->categories[$catindex]][$index];
     }
     
-    private function formatWord($word) {
+    private function formatWord($word) : string {
         switch ($this->format) {
             case 'ucfirst': return ucfirst($word);
             case 'lcfirst': return lcfirst($word);
