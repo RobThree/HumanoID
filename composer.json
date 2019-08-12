@@ -2,7 +2,7 @@
     "name": "RobThree/UrlGenerator",
     "description": "Generate friendly URLs",
     "minimum-stability": "stable",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "RobIII",
