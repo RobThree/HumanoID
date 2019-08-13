@@ -87,7 +87,7 @@ The 'decoding' of a URL relies on a lookup table which is created when the `UrlG
 - Whatever wordlist/separator/format you decide on, once you picked it, you're stuck with it (unless you want to break all your URL's or you'll need to do some (on-the-fly?) conversion.
 - When not using any separator, try to use longer, unique, words that are not contained in other words (so, for example, avoid "`old`, `cold`" or "`expensive`,`inexpensive`")
 - If ambiguous words without a separator are unavoidable or desired you could consider only using the `toUrl(int $id)` method and storing the result alongside the `id` in your data. Apply a unique constraint and index if you can. That way you can use the field with the URL value to do a lookup
-- [As mentionded earlier](#url-to-id-integer-conversion); try to keep this class around for as long as possible. The constructor contains some fairly CPU intensive code (building the lookup table), so ideally you keep an instance alive for as long as possible.
+- [As mentioned earlier](#url-to-id-integer-conversion); try to keep this class around for as long as possible. The constructor contains some fairly CPU intensive code (building the lookup table), so ideally you keep an instance alive for as long as possible.
 
 ### Notes
 The 'ambiguous words' problem _can_ probably be solved in a later version by changing the iteratively lookup process into a recusive algorithm; that way when a lookup turns out to fail (again, `cold`, `old` for example) the next value can be tried recursively until the URL is completely decoded correctly (or still fail as a whole).
