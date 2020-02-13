@@ -12,39 +12,31 @@ class UrlGenerator
 
     /**
      * Holds an array with category => string-array data with the words to use in the url
-     * @var string[]
      */
-    private $data;
+    private array $data;
     /**
      * Used to keep track of the categories contained in the data
-     * @var array|null
      */
-    private $categories;
+    private ?array $categories;
     /**
      * Will hold (reversed)string lookup to word index data
-     * @var string[]
      */
-    private $lookup;
+    private array $lookup;
     /**
      * Separator to use, if any
-     * @var string|null
      */
-    private $separator;
+    private ?string $separator;
     /**
-     * @var string Format to use (one of 'ucfirst', 'lcfirst', 'upper', 'lower' or null for no formatting
+     * Format to use (one of 'ucfirst', 'lcfirst', 'upper', 'lower' or null for no formatting
      */
-    private $format;
+    private ?string $format;
 
     /**
      * UrlGenerator constructor.
      *
-     * @param array $words
-     * @param array|null $categories
-     * @param string|null $separator
-     * @param string|null $format
      * @throws UrlGeneratorException
      */
-    public function __construct(array $words, ?array $categories = null, ?string $separator = '-', string $format = null)
+    public function __construct(array $words, ?array $categories = null, ?string $separator = '-', ?string $format = null)
     {
         if (count($words) === 0) {
             throw new UrlGeneratorException('No words specified');
@@ -103,8 +95,7 @@ class UrlGenerator
     }
 
     /**
-     * @param int $id
-     * @return string
+     * Converts an id into a URL value
      * @throws UrlGeneratorException
      */
     public function toURL(int $id): string
@@ -114,7 +105,7 @@ class UrlGenerator
         }
 
         $value = $id;                               // Initialize value to id value
-        $catIndex = count($this->categories) - 1;  // Start at last category
+        $catIndex = count($this->categories) - 1;   // Start at last category
         $result = [];                               // Array of words we calculated
         $radix = count($this->data[$this->categories[$catIndex]]);                 // Get radix
 
@@ -123,7 +114,7 @@ class UrlGenerator
             $result[] = $this->formatWord($this->getWord($catIndex, $value % $radix));  // Determine word for this category
             $value = (int)($value / $radix);                                            // Calculate new value
             $catIndex = max(--$catIndex, 0);                                            // Next category (going from highest down to 0, repeating 0 if required)
-            $radix = count($this->data[$this->categories[$catIndex]]);                 // Get radix
+            $radix = count($this->data[$this->categories[$catIndex]]);                  // Get radix
         } while ($value > 0);
 
         // Return string, glued with optional separator, in correct order
@@ -131,8 +122,7 @@ class UrlGenerator
     }
 
     /**
-     * @param string $text
-     * @return int
+     * Parses a URL value and returns the integer equivalent
      * @throws UrlGeneratorException
      */
     public function parseUrl(string $text): int
@@ -145,13 +135,13 @@ class UrlGenerator
 
         $step = 1;                                      // Initialize step
         $result = 0;                                    // Initialize result, where the calculated ID will be stored
-        $catIndex = count($this->categories) - 1;      // Start at last category
+        $catIndex = count($this->categories) - 1;       // Start at last category
         try {
             // Below is basically a base-N to decimal conversion where each N may differ on the number of words in that category
             while ($value) {
                 $ix = $this->lookupWordIndex($this->categories[$catIndex], $value); // Find the index of the word
                 $result += ($ix * $step);                                           // Add the index * step to the calculated result
-                $step *= count($this->data[$this->categories[$catIndex]]);         // Increase step size
+                $step *= count($this->data[$this->categories[$catIndex]]);          // Increase step size
                 $value = substr($value, 0, -(strlen($this->getWord($catIndex, $ix)) + strlen($this->separator)));  // Strip found word from text
                 $catIndex = max(--$catIndex, 0);                                    // Next category (going from highest down to 0, repeating 0 if required)
             }
@@ -163,19 +153,15 @@ class UrlGenerator
     }
 
     /**
-     * @param int $catIndex
-     * @param int $index
-     * @return string
+     * Return the word for the given category at the specified index
      */
     private function getWord(int $catIndex, int $index): string
     {
-        // Return the word for the given category at the specified index
         return $this->data[$this->categories[$catIndex]][$index];
     }
 
     /**
-     * @param $word
-     * @return string
+     * Formats a word depending on the format
      */
     private function formatWord($word): string
     {
@@ -194,9 +180,7 @@ class UrlGenerator
     }
 
     /**
-     * @param string $category
-     * @param string $word
-     * @return int
+     * Returns the index of a word in the given category
      * @throws UrlGeneratorException
      */
     private function lookupWordIndex(string $category, string $word): int
@@ -222,6 +206,9 @@ class UrlGenerator
         throw new UrlGeneratorException(sprintf('Failed to lookup "%s"', $word));
     }
 
+    /**
+     * Adds a word to the lookup table
+     */
     private function addLookup(string $category, string $word, int $index): void
     {
         $p = &$this->lookup[$category];
