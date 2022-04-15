@@ -12,13 +12,6 @@ class UrlGeneratorTests extends TestCase
     ];
     
      public function testTestVectors() {
-        $target = new UrlGenerator\UrlGenerator($this->defaultWordSet);
-        $this->assertSame('dog',     $target->toUrl(0));
-        $this->assertSame('cat',     $target->toUrl(1));
-        $this->assertSame('hamster', $target->toUrl(2));
-
-        $this->assertSame('red-dog',   $target->toUrl(3));
-        $this->assertSame('green-dog', $target->toUrl(4));
-        $this->assertSame('blue-dog',  $target->toUrl(5));
+		//TODO: Implement
     }
 }

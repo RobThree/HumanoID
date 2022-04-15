@@ -1,12 +1,12 @@
 {
-    "name": "RobThree/UrlGenerator",
+    "name": "robthree/urlgenerator",
     "description": "Friendly URL generator. Converts integers to words and back",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
             "name": "RobIII",
-            "homepage": "http://robiii.me",
+            "homepage": "https:\/\/robiii.me"
         }
     ],
     "require-dev": {
