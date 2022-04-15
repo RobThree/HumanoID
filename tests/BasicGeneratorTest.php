@@ -1,13 +1,20 @@
 <?php
-require_once '../src/UrlGenerator.php';
+
+declare(strict_types=1);
+
+namespace RobThree\Tests\UrlGenerator;
 
 use PHPUnit\Framework\TestCase;
+use RobThree\UrlGenerator\UrlGenerator;
 
-class UrlGeneratorTests extends TestCase
+/**
+ * @see UrlGenerator
+ */
+class BasicGeneratorTest extends TestCase
 {
-    private $defaultWordSet = [
+    private $defaultWordSets = [
         'adjectives' => ['big', 'funny', 'lazy'],
-        'colors' => ['red', 'green', 'blue'],
+        'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
         'animals' => ['dog', 'cat', 'hamster']
     ];
 
