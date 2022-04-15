@@ -8,44 +8,49 @@ class UrlGenerator
     /**
      * Key for lookup array to store a lookup result (index). Can, technically, be anything except any of the (lowercase) chars allowed in the urls.
      */
-    private const INDEXPLACEHOLDER = 0;
+    private const INDEX_PLACEHOLDER = 0;
 
     /**
-     * Holds an array with category => string-array data with the words to use in the url
+     * Holds an array of word sets
+     * The first level is keyed by "word category" and contains a list (array) of words by array-key
+     *
+     * @var array[string, array[array-key, string]]
      */
-    private array $data;
+    private array $wordSetData;
+
     /**
      * Used to keep track of the categories contained in the data
      */
     private ?array $categories;
+
     /**
      * Will hold (reversed)string lookup to word index data
      */
     private array $lookup;
+
     /**
      * Separator to use, if any
      */
     private ?string $separator;
+
     /**
      * Format to use (one of 'ucfirst', 'lcfirst', 'upper', 'lower' or null for no formatting
      */
     private ?string $format;
 
     /**
-     * UrlGenerator constructor.
-     *
      * @throws UrlGeneratorException
      */
-    public function __construct(array $words, ?array $categories = null, ?string $separator = '-', ?string $format = null)
+    public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', ?string $format = null)
     {
-        if (count($words) === 0) {
+        if (count($wordSets) === 0) {
             throw new UrlGeneratorException('No words specified');
         }
-        $this->data = $words;
+        $this->wordSetData = $wordSets;
 
         // No categories specified? "Autodetect" categories to use
         if ($categories === null) {
-            $categories = array_keys($this->data);
+            $categories = array_keys($this->wordSetData);
         }
 
         // Ensure we have categories
@@ -60,18 +65,18 @@ class UrlGenerator
             if (!is_string($k) || strlen($k) === 0) {
                 throw new UrlGeneratorException(sprintf('Category "%s" is invalid', $k));
             }
-            if (!array_key_exists($k, $this->data) || !is_array($this->data[$k]) || count($this->data[$k]) === 0) {
+            if (!array_key_exists($k, $this->wordSetData) || !is_array($this->wordSetData[$k]) || count($this->wordSetData[$k]) === 0) {
                 throw new UrlGeneratorException(sprintf('Category "%s" not found in datafile, category is not an array or category is an empty array', $k));
             }
 
             // Ensure unique, normalized, values (make sure we use array_values, because array_unique will preserve the 'key' which is our index, causing missig indices on duplicate values)
-            $this->data[$k] = array_values(array_unique(array_map(function ($s) {
+            $this->wordSetData[$k] = array_values(array_unique(array_map(function ($s) {
                 return strtolower(trim($s));
-            }, $this->data[$k])));
+            }, $this->wordSetData[$k])));
 
             // Initialize lookup structure; add all words to our lookup
             $this->lookup[$k] = [];
-            foreach (array_flip($this->data[$k]) as $w => $i) // The array_flip gives us indices (word=>index) AND deduplicates items in a single go
+            foreach (array_flip($this->wordSetData[$k]) as $w => $i) // The array_flip gives us indices (word=>index) AND deduplicates items in a single go
             {
                 $this->addLookup($k, $w, $i);
             }
@@ -107,14 +112,14 @@ class UrlGenerator
         $value = $id;                               // Initialize value to id value
         $catIndex = count($this->categories) - 1;   // Start at last category
         $result = [];                               // Array of words we calculated
-        $radix = count($this->data[$this->categories[$catIndex]]);                 // Get radix
+        $radix = count($this->wordSetData[$this->categories[$catIndex]]);                 // Get radix
 
         // Below is basically a decimal to base-N conversion where each N may differ on the number of words in that category
         do {
             $result[] = $this->formatWord($this->getWord($catIndex, $value % $radix));  // Determine word for this category
             $value = (int)($value / $radix);                                            // Calculate new value
             $catIndex = max(--$catIndex, 0);                                            // Next category (going from highest down to 0, repeating 0 if required)
-            $radix = count($this->data[$this->categories[$catIndex]]);                  // Get radix
+            $radix = count($this->wordSetData[$this->categories[$catIndex]]);                  // Get radix
         } while ($value > 0);
 
         // Return string, glued with optional separator, in correct order
@@ -141,7 +146,7 @@ class UrlGenerator
             while ($value) {
                 $ix = $this->lookupWordIndex($this->categories[$catIndex], $value); // Find the index of the word
                 $result += ($ix * $step);                                           // Add the index * step to the calculated result
-                $step *= count($this->data[$this->categories[$catIndex]]);          // Increase step size
+                $step *= count($this->wordSetData[$this->categories[$catIndex]]);          // Increase step size
                 $value = substr($value, 0, -(strlen($this->getWord($catIndex, $ix)) + strlen($this->separator)));  // Strip found word from text
                 $catIndex = max(--$catIndex, 0);                                    // Next category (going from highest down to 0, repeating 0 if required)
             }
@@ -157,7 +162,7 @@ class UrlGenerator
      */
     private function getWord(int $catIndex, int $index): string
     {
-        return $this->data[$this->categories[$catIndex]][$index];
+        return $this->wordSetData[$this->categories[$catIndex]][$index];
     }
 
     /**
@@ -194,8 +199,8 @@ class UrlGenerator
             }
 
             $p = &$p[$c];
-            if (array_key_exists(self::INDEXPLACEHOLDER, $p)) {
-                $lastIx = $p[self::INDEXPLACEHOLDER];
+            if (array_key_exists(self::INDEX_PLACEHOLDER, $p)) {
+                $lastIx = $p[self::INDEX_PLACEHOLDER];
             }
         }
         if ($lastIx !== null) {
@@ -220,6 +225,6 @@ class UrlGenerator
             $p = &$p[$c];
         }
 
-        $p[self::INDEXPLACEHOLDER] = $index;
+        $p[self::INDEX_PLACEHOLDER] = $index;
     }
 }
