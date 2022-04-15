@@ -1,5 +1,6 @@
 <?php
-require_once('src/UrlGenerator.php');
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 header('Content-Type: text/plain');
 
