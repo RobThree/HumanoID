@@ -58,6 +58,14 @@ You can use custom word lists; you can store these anywhere you want like in a J
 
 The `UrlGenerator` will automatically determine which 'categories' are available. In the above example generated url's would take the form `adjective-color-animal`. Whenever this should turn out to be not enough, the `UrlGenerator` automatically repeats the first category as often as needed; so this would result in `adjective-adjective-color-animal` or even `adjective-adjective-adjective-color-animal` and so on. However, the order of the categories can be specified by passing an array of words to the `$categories` argument of the `UrlGenerator` class. You could, for example, pass `['colors','adjectives','animals']` which will result in url's that take the form `color-adjective-animal` or, again, when this should not be enough: `color-color-color-adjective-animal`.
 
+Ofcourse you don't have to use adjectives, colors and animals. It can be anything you want. So, more generalized, you can provide any data structure in the form
+
+    [
+        "cateogory" =>  ["value", "value", "value", ...],
+        "cateogory" =>  ["value", "value", "value", ...],
+        ...
+    ]
+    
 ## Separator
 
 By default `UrlGenerator` uses the `-` character to separate words. This results in urls like `big-red-whale`. You can specify any desired string as a separator; it helps if the separator string is not contained in any of the words. It is possible to specify an empty (`''`) or `null` separator. This wil result in urls like `bigredwhale`. This is the closest to what Gfycat url's look like. However, you need to take extreme care that the words don't overlap. If, for example, the adjectives would contain both `old` and `cold` a url like `genericoldpanda` will result in an ambiguous result ("generi", "**cold**", "panda" vs. "generi**c"**, "**old**", "panda"). With a carefully generated wordlist this shouldn't have to be a problem.
