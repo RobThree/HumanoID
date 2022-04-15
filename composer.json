@@ -1,7 +1,7 @@
 {
     "name": "robthree/urlgenerator",
+    "type": "library",
     "description": "Friendly URL generator. Converts integers to words and back",
-    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
@@ -9,6 +9,9 @@
             "homepage": "https://robiii.me"
         }
     ],
+    "require": {
+        "php": "^7.2 || ^8.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^8.3"
     },
@@ -16,5 +19,11 @@
         "psr-4": {
             "RobThree\\UrlGenerator\\": "src/"
         }
-    }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RobThree\\Tests\\UrlGenerator\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
 }
