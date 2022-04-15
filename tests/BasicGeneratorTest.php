@@ -10,8 +10,8 @@ class UrlGeneratorTests extends TestCase
         'colors' => ['red', 'green', 'blue'],
         'animals' => ['dog', 'cat', 'hamster']
     ];
-    
-     public function testTestVectors() {
-		//TODO: Implement
+
+    public function testTestVectors() {
+        //TODO: Implement
     }
 }
