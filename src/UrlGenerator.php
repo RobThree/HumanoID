@@ -43,8 +43,8 @@ class UrlGenerator
     private ?WordFormatEnum $format;
 
     /**
-     * @param array<string, array<array-key, string>> $wordSets
-     * @param null|array<array-key, string> $categories
+     * @param array<string, array<array-key, string|mixed>|mixed> $wordSets
+     * @param null|array<array-key, string|mixed> $categories
      * @param null|string|WordFormatEnum $format
      *
      * @throws UrlGeneratorException
@@ -71,18 +71,18 @@ class UrlGenerator
         $this->lookup = [];
 
         // Check categories and build lookup table
-        foreach (array_unique($this->categories) as $k) {
-            if (!is_string($k) || strlen($k) === 0) {
-                throw new UrlGeneratorException(sprintf('Category "%s" is invalid', $k));
+        foreach (array_unique($this->categories) as $categoryName) {
+            if (!is_string($categoryName) || strlen($categoryName) === 0) {
+                throw new UrlGeneratorException(sprintf('Category "%s" is invalid', $categoryName));
             }
             if (
-                !array_key_exists($k, $this->wordSetData) ||
-                !is_array($this->wordSetData[$k]) ||
-                count($this->wordSetData[$k]) === 0
+                !array_key_exists($categoryName, $this->wordSetData) ||
+                !is_array($this->wordSetData[$categoryName]) ||
+                count($this->wordSetData[$categoryName]) === 0
             ) {
                 $message = sprintf(
                     'Category "%s" not found in datafile, category is not an array or category is an empty array',
-                    $k
+                    $categoryName
                 );
                 throw new UrlGeneratorException($message);
             }
@@ -90,15 +90,15 @@ class UrlGenerator
             // Ensure unique and normalized values
             // Also make sure we use array_values, because array_unique will preserve the 'key' which is our index,
             // causing missing indices on duplicate values
-            $this->wordSetData[$k] = array_values(array_unique(array_map(function ($s) {
+            $this->wordSetData[$categoryName] = array_values(array_unique(array_map(function ($s) {
                 return strtolower(trim($s));
-            }, $this->wordSetData[$k])));
+            }, $this->wordSetData[$categoryName])));
 
             // Initialize lookup structure; add all words to our lookup
-            $this->lookup[$k] = [];
+            $this->lookup[$categoryName] = [];
             // The array_flip gives us indices (word=>index) AND de-duplicates items in a single go
-            foreach (array_flip($this->wordSetData[$k]) as $w => $i) {
-                $this->addLookup($k, $w, $i);
+            foreach (array_flip($this->wordSetData[$categoryName]) as $w => $i) {
+                $this->addLookup($categoryName, $w, $i);
             }
         }
 
@@ -108,12 +108,14 @@ class UrlGenerator
         if (is_string($format)) {
             $format = strtolower(trim($format));
             try {
-                $format = WordFormatEnum::from($format);
+                $formatEnum = WordFormatEnum::from($format);
             } catch (Throwable $throwable) {
                 throw new UrlGeneratorException(sprintf('Unsupported format "%s"', $format));
             }
+            $this->format = $formatEnum;
+        } else {
+            $this->format = $format;
         }
-        $this->format = $format;
     }
 
     /**
