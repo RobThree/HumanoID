@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace RobThree\UrlGenerator;
 
+use Throwable;
+
 class UrlGenerator
 {
     /**
@@ -33,15 +35,14 @@ class UrlGenerator
      */
     private ?string $separator;
 
-    /**
-     * Format to use (one of 'ucfirst', 'lcfirst', 'upper', 'lower' or null for no formatting
-     */
-    private ?string $format;
+    private ?WordFormatEnum $format;
 
     /**
+     * @param null|string|WordFormatEnum $format
+     *
      * @throws UrlGeneratorException
      */
-    public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', ?string $format = null)
+    public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', $format = null)
     {
         if (count($wordSets) === 0) {
             throw new UrlGeneratorException('No words specified');
@@ -85,18 +86,15 @@ class UrlGenerator
         // Set other properties
         $this->separator = $separator;
 
-        $format = strtolower(trim($format ?? ''));
-        switch ($format) {
-            case '':
-            case 'ucfirst':
-            case 'lcfirst':
-            case 'upper':
-            case 'lower':
-                $this->format = $format;
-                break;
-            default:
+        if (is_string($format)) {
+            $format = strtolower(trim($format));
+            try {
+                $format = WordFormatEnum::from($format);
+            } catch (Throwable $throwable) {
                 throw new UrlGeneratorException(sprintf('Unsupported format "%s"', $format));
+            }
         }
+        $this->format = $format;
     }
 
     /**
@@ -171,13 +169,13 @@ class UrlGenerator
     private function formatWord($word): string
     {
         switch ($this->format) {
-            case 'ucfirst':
+            case WordFormatEnum::ucfirst():
                 return ucfirst($word);
-            case 'lcfirst':
+            case WordFormatEnum::lcfirst():
                 return lcfirst($word);
-            case 'upper':
+            case WordFormatEnum::upper():
                 return strtoupper($word);
-            case 'lower':
+            case WordFormatEnum::lower():
                 return strtolower($word);
             default:
                 return $word;
