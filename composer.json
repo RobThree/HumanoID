@@ -6,7 +6,13 @@
     "authors": [
         {
             "name": "RobIII",
-            "homepage": "https://robiii.me"
+            "homepage": "https://robiii.me",
+            "role": "Maintainer & Creator"
+        },
+        {
+            "name": "MallardDuck (Dan Pock)",
+            "homepage": "https://github.com/mallardduck",
+            "role": "Maintainer"
         }
     ],
     "require": {
