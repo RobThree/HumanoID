@@ -19,11 +19,6 @@ class BasicParserTest extends TestCase
 {
     use MatchesSnapshots;
 
-    /**
-     * @var UrlGenerator
-     */
-    private $generator;
-
     private $defaultWordSets = [
         'adjectives' => ['big', 'funny', 'lazy'],
         'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],

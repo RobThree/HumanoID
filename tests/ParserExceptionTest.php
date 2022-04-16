@@ -17,14 +17,7 @@ use Spatie\Snapshots\MatchesSnapshots;
  */
 class ParserExceptionTest extends TestCase
 {
-    use MatchesSnapshots;
-
-    /**
-     * @var UrlGenerator
-     */
-    private $generator;
-
-    private $defaultWordSets = [
+    private array $defaultWordSets = [
         'adjectives' => ['big', 'funny', 'lazy'],
         'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
         'animals' => ['dog', 'cat', 'hamster']
