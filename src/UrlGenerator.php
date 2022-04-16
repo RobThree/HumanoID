@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace RobThree\UrlGenerator;
@@ -8,7 +9,8 @@ use Throwable;
 class UrlGenerator
 {
     /**
-     * Key for lookup array to store a lookup result (index). Can, technically, be anything except any of the (lowercase) chars allowed in the urls.
+     * Key for lookup array to store a lookup result (index).
+     * Also can, technically, be anything except any of the (lowercase) chars allowed in the urls.
      */
     private const INDEX_PLACEHOLDER = 0;
 
@@ -61,7 +63,9 @@ class UrlGenerator
 
         // Ensure we have categories
         if (count($categories) === 0) {
-            throw new UrlGeneratorException('Categories must be either: unset (enables autodetect), or an array with size > 0, or unset');
+            throw new UrlGeneratorException(
+                'Categories must be either: unset (enables autodetect), or an array with size > 0, or unset'
+            );
         }
         $this->categories = $categories;
         $this->lookup = [];
@@ -71,19 +75,29 @@ class UrlGenerator
             if (!is_string($k) || strlen($k) === 0) {
                 throw new UrlGeneratorException(sprintf('Category "%s" is invalid', $k));
             }
-            if (!array_key_exists($k, $this->wordSetData) || !is_array($this->wordSetData[$k]) || count($this->wordSetData[$k]) === 0) {
-                throw new UrlGeneratorException(sprintf('Category "%s" not found in datafile, category is not an array or category is an empty array', $k));
+            if (
+                !array_key_exists($k, $this->wordSetData) ||
+                !is_array($this->wordSetData[$k]) ||
+                count($this->wordSetData[$k]) === 0
+            ) {
+                $message = sprintf(
+                    'Category "%s" not found in datafile, category is not an array or category is an empty array',
+                    $k
+                );
+                throw new UrlGeneratorException();
             }
 
-            // Ensure unique, normalized, values (make sure we use array_values, because array_unique will preserve the 'key' which is our index, causing missig indices on duplicate values)
+            // Ensure unique and normalized values
+            // Also make sure we use array_values, because array_unique will preserve the 'key' which is our index,
+            // causing missing indices on duplicate values
             $this->wordSetData[$k] = array_values(array_unique(array_map(function ($s) {
                 return strtolower(trim($s));
             }, $this->wordSetData[$k])));
 
             // Initialize lookup structure; add all words to our lookup
             $this->lookup[$k] = [];
-            foreach (array_flip($this->wordSetData[$k]) as $w => $i) // The array_flip gives us indices (word=>index) AND deduplicates items in a single go
-            {
+            // The array_flip gives us indices (word=>index) AND de-duplicates items in a single go
+            foreach (array_flip($this->wordSetData[$k]) as $w => $i) {
                 $this->addLookup($k, $w, $i);
             }
         }
@@ -112,17 +126,26 @@ class UrlGenerator
             throw new UrlGeneratorException('ID must be a postive integer');
         }
 
-        $value = $id;                               // Initialize value to id value
-        $catIndex = count($this->categories) - 1;   // Start at last category
-        $result = [];                               // Array of words we calculated
-        $radix = count($this->wordSetData[$this->categories[$catIndex]]);                 // Get radix
+        // Initialize value to id value
+        $value = $id;
+        // Start at last category
+        $catIndex = count($this->categories) - 1;
+        // Array of words we calculated
+        $result = [];
+        // Get radix
+        $radix = count($this->wordSetData[$this->categories[$catIndex]]);
 
-        // Below is basically a decimal to base-N conversion where each N may differ on the number of words in that category
+        // Below is basically a decimal to base-N conversion
+        // where each N may differ on the number of words in that category
         do {
-            $result[] = $this->formatWord($this->getWord($catIndex, $value % $radix));  // Determine word for this category
-            $value = (int)($value / $radix);                                            // Calculate new value
-            $catIndex = max(--$catIndex, 0);                                            // Next category (going from highest down to 0, repeating 0 if required)
-            $radix = count($this->wordSetData[$this->categories[$catIndex]]);                  // Get radix
+            // Determine word for this category
+            $result[] = $this->formatWord($this->getWord($catIndex, $value % $radix));
+            // Calculate new value
+            $value = (int)($value / $radix);
+            // Next category (going from highest down to 0, repeating 0 if required)
+            $catIndex = max(--$catIndex, 0);
+            // Get radix
+            $radix = count($this->wordSetData[$this->categories[$catIndex]]);
         } while ($value > 0);
 
         // Return string, glued with optional separator, in correct order
@@ -135,23 +158,33 @@ class UrlGenerator
      */
     public function parseUrl(string $text): int
     {
-        $value = strtolower(trim($text));               // Normalize value
-        if (strlen($value) === 0)                       // Ensure we have something to parse
-        {
+        // Normalize value
+        $value = strtolower(trim($text));
+        // Ensure we have something to parse
+        if (strlen($value) === 0) {
             throw new UrlGeneratorException('No text specified');
         }
 
-        $step = 1;                                      // Initialize step
-        $result = 0;                                    // Initialize result, where the calculated ID will be stored
-        $catIndex = count($this->categories) - 1;       // Start at last category
+        // Initialize step
+        $step = 1;
+        // Initialize result, where the calculated ID will be stored
+        $result = 0;
+        // Start at last category
+        $catIndex = count($this->categories) - 1;
         try {
-            // Below is basically a base-N to decimal conversion where each N may differ on the number of words in that category
+            // Below is basically a base-N to decimal conversion
+            // where each N may differ on the number of words in that category
             while ($value) {
-                $ix = $this->lookupWordIndex($this->categories[$catIndex], $value); // Find the index of the word
-                $result += ($ix * $step);                                           // Add the index * step to the calculated result
-                $step *= count($this->wordSetData[$this->categories[$catIndex]]);          // Increase step size
-                $value = substr($value, 0, -(strlen($this->getWord($catIndex, $ix)) + strlen($this->separator)));  // Strip found word from text
-                $catIndex = max(--$catIndex, 0);                                    // Next category (going from highest down to 0, repeating 0 if required)
+                // Find the index of the word
+                $ix = $this->lookupWordIndex($this->categories[$catIndex], $value);
+                // Add the index * step to the calculated result
+                $result += ($ix * $step);
+                // Increase step size
+                $step *= count($this->wordSetData[$this->categories[$catIndex]]);
+                // Strip found word from text
+                $value = substr($value, 0, -(strlen($this->getWord($catIndex, $ix)) + strlen($this->separator)));
+                // Next category (going from highest down to 0, repeating 0 if required)
+                $catIndex = max(--$catIndex, 0);
             }
         } catch (\Exception $ex) {
             throw new UrlGeneratorException(sprintf('Failed to lookup "%s"', $text));
