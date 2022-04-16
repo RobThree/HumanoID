@@ -121,8 +121,21 @@ class UrlGenerator
     /**
      * Converts an id into a URL value
      * @throws UrlGeneratorException
+     * @deprecated This method will be removed in a future release. Use the `generate` method instead.
+
      */
     public function toURL(int $id): string
+    {
+        return $this->generate($id);
+    }
+
+
+    /**
+     * Convert an integer to its respective generated {PACKAGE_NAME} ID based on the current config.
+     *
+     * @throws UrlGeneratorException
+     */
+    public function generate(int $id): string
     {
         if ($id < 0) {
             throw new UrlGeneratorException('ID must be a positive integer');
@@ -157,8 +170,20 @@ class UrlGenerator
     /**
      * Parses a URL value and returns the integer equivalent
      * @throws UrlGeneratorException
+     * @deprecated This method will be removed in a future release. Use the `parseId` method instead.
      */
     public function parseUrl(string $text): int
+    {
+        return $this->parseId($text);
+    }
+
+
+    /**
+     * Parses an {PACKAGE_NAME} ID value and returns the integer equivalent
+     *
+     * @throws UrlGeneratorException
+     */
+    public function parseId(string $text): int
     {
         // Normalize value
         $value = strtolower(trim($text));
