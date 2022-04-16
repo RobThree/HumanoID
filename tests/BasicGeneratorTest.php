@@ -52,6 +52,38 @@ class BasicGeneratorTest extends TestCase
      * @dataProvider provideFormatOptions
      * @throws UrlGeneratorException
      */
+    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens(?WordFormatEnum $wordFormat = null) {
+        $generator = new UrlGenerator($this->defaultWordSets, null, '', $wordFormat);
+        $firstTwoDozenIds =[];
+        for ($i = 0; $i <= 24; $i++) {
+            $firstTwoDozenIds[] = $generator->toURL($i);
+        }
+
+        $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
+    }
+
+    /**
+     * @param null|WordFormatEnum $wordFormat
+     *
+     * @dataProvider provideFormatOptions
+     * @throws UrlGeneratorException
+     */
+    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator(?WordFormatEnum $wordFormat = null) {
+        $generator = new UrlGenerator($this->defaultWordSets, null, null, $wordFormat);
+        $firstTwoDozenIds =[];
+        for ($i = 0; $i <= 24; $i++) {
+            $firstTwoDozenIds[] = $generator->toURL($i);
+        }
+
+        $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
+    }
+
+    /**
+     * @param null|WordFormatEnum $wordFormat
+     *
+     * @dataProvider provideFormatOptions
+     * @throws UrlGeneratorException
+     */
     public function testCanGenerateDozenRandomLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null) {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds =[];
