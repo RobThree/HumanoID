@@ -56,7 +56,7 @@ class UrlGenerator
 
         // Ensure we have categories
         if (count($categories) === 0) {
-            throw new UrlGeneratorException('Categories must be an array with size > 0');
+            throw new UrlGeneratorException('Categories must be either: unset (enables autodetect), or an array with size > 0, or unset');
         }
         $this->categories = $categories;
         $this->lookup = [];
@@ -158,9 +158,9 @@ class UrlGenerator
     /**
      * Return the word for the given category at the specified index
      */
-    private function getWord(int $catIndex, int $index): string
+    private function getWord(int $categoryIndex, int $wordIndex): string
     {
-        return $this->wordSetData[$this->categories[$catIndex]][$index];
+        return $this->wordSetData[$this->categories[$categoryIndex]][$wordIndex];
     }
 
     /**
@@ -202,7 +202,6 @@ class UrlGenerator
             }
         }
         if ($lastIx !== null) {
-            /** @noinspection PhpStrictTypeCheckingInspection */
             return $lastIx;
         }
 
