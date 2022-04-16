@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^7.4 || ^8.0",
+        "spatie/enum": "^3.12"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.20",
