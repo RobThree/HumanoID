@@ -84,7 +84,7 @@ class UrlGenerator
                     'Category "%s" not found in datafile, category is not an array or category is an empty array',
                     $k
                 );
-                throw new UrlGeneratorException();
+                throw new UrlGeneratorException($message);
             }
 
             // Ensure unique and normalized values
