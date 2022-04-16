@@ -123,7 +123,7 @@ class UrlGenerator
     public function toURL(int $id): string
     {
         if ($id < 0) {
-            throw new UrlGeneratorException('ID must be a postive integer');
+            throw new UrlGeneratorException('ID must be a positive integer');
         }
 
         // Initialize value to id value
