@@ -62,7 +62,7 @@ class GeneratorExceptionTest extends BaseTestCase
     {
         $generator = new UrlGenerator($this->defaultWordSets);
         $this->expectException(UrlGeneratorException::class);
-        $this->expectExceptionMessage('ID must be a postive integer');
+        $this->expectExceptionMessage('ID must be a positive integer');
         $generator->toURL(-43);
     }
 }
