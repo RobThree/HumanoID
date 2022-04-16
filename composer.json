@@ -25,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "RobThree\\Tests\\UrlGenerator\\": "tests/"
+            "RobThree\\UrlGenerator\\Test\\": "tests"
         }
     },
     "minimum-stability": "stable"

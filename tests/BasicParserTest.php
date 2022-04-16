@@ -2,33 +2,24 @@
 
 declare(strict_types=1);
 
-namespace RobThree\Tests\UrlGenerator;
+namespace RobThree\UrlGenerator\Test;
 
-use PHPUnit\Framework\TestCase;
 use RobThree\UrlGenerator\UrlGenerator;
 use RobThree\UrlGenerator\UrlGeneratorException;
 use RobThree\UrlGenerator\WordFormatEnum;
-use Spatie\Snapshots\MatchesSnapshots;
 
 /**
  * This set of tests will cover only the most basic kinds of parsing tests.
  *
  * @see UrlGenerator
  */
-class BasicParserTest extends TestCase
+class BasicParserTest extends BaseTestCase
 {
-    use MatchesSnapshots;
-
-    private $defaultWordSets = [
-        'adjectives' => ['big', 'funny', 'lazy'],
-        'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-        'animals' => ['dog', 'cat', 'hamster']
-    ];
-
     /**
      * @throws UrlGeneratorException
      */
-    public function testCanParseIdIntoInt() {
+    public function testCanParseIdIntoInt(): void
+    {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', WordFormatEnum::ucfirst());
         $firstTwoDozenIds = [
             "Dog",

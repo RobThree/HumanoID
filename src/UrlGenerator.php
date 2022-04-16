@@ -16,28 +16,33 @@ class UrlGenerator
      * Holds an array of word sets
      * The first level is keyed by "word category" and contains a list (array) of words by array-key
      *
-     * @var array[string, array[array-key, string]]
+     * @var array<string, array<array-key, string>>
      */
     private array $wordSetData;
 
     /**
      * Used to keep track of the categories contained in the data
+     *
+     * @var array<array-key, string>
      */
-    private ?array $categories;
+    private array $categories;
 
     /**
      * Will hold (reversed)string lookup to word index data
+     * @var array<string, mixed>
      */
     private array $lookup;
 
     /**
      * Separator to use, if any
      */
-    private ?string $separator;
+    private string $separator;
 
     private ?WordFormatEnum $format;
 
     /**
+     * @param array<string, array<array-key, string>> $wordSets
+     * @param null|array<array-key, string> $categories
      * @param null|string|WordFormatEnum $format
      *
      * @throws UrlGeneratorException
@@ -166,7 +171,7 @@ class UrlGenerator
     /**
      * Formats a word depending on the format
      */
-    private function formatWord($word): string
+    private function formatWord(string $word): string
     {
         switch ($this->format) {
             case WordFormatEnum::ucfirst():

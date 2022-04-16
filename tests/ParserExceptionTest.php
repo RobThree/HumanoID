@@ -2,28 +2,19 @@
 
 declare(strict_types=1);
 
-namespace RobThree\Tests\UrlGenerator;
+namespace RobThree\UrlGenerator\Test;
 
-use PHPUnit\Framework\TestCase;
 use RobThree\UrlGenerator\UrlGenerator;
 use RobThree\UrlGenerator\UrlGeneratorException;
-use RobThree\UrlGenerator\WordFormatEnum;
-use Spatie\Snapshots\MatchesSnapshots;
 
 /**
  * This set of tests will cover only the most basic kinds of tests.
  *
  * @see UrlGenerator
  */
-class ParserExceptionTest extends TestCase
+class ParserExceptionTest extends BaseTestCase
 {
-    private array $defaultWordSets = [
-        'adjectives' => ['big', 'funny', 'lazy'],
-        'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-        'animals' => ['dog', 'cat', 'hamster']
-    ];
-
-    public function testWillThrowExceptionWithEmptyIdInput()
+    public function testWillThrowExceptionWithEmptyIdInput(): void
     {
         $generator = new UrlGenerator($this->defaultWordSets);
         $this->expectException(UrlGeneratorException::class);
@@ -31,7 +22,7 @@ class ParserExceptionTest extends TestCase
         $generator->parseUrl('  ');
     }
 
-    public function testWillThrowExceptionWithInvalidIdInput()
+    public function testWillThrowExceptionWithInvalidIdInput(): void
     {
         $generator = new UrlGenerator($this->defaultWordSets);
         $this->expectException(UrlGeneratorException::class);

@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace RobThree\Tests\UrlGenerator;
+namespace RobThree\UrlGenerator\Test;
 
-use PHPUnit\Framework\TestCase;
 use RobThree\UrlGenerator\UrlGenerator;
 use RobThree\UrlGenerator\UrlGeneratorException;
 use RobThree\UrlGenerator\WordFormatEnum;
@@ -15,15 +14,9 @@ use Spatie\Snapshots\MatchesSnapshots;
  *
  * @see UrlGenerator
  */
-class BasicGeneratorTest extends TestCase
+class BasicGeneratorTest extends BaseTestCase
 {
     use MatchesSnapshots;
-
-    private $defaultWordSets = [
-        'adjectives' => ['big', 'funny', 'lazy'],
-        'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-        'animals' => ['dog', 'cat', 'hamster']
-    ];
 
     /**
      * @param null|WordFormatEnum $wordFormat
@@ -31,7 +24,8 @@ class BasicGeneratorTest extends TestCase
      * @dataProvider provideFormatOptions
      * @throws UrlGeneratorException
      */
-    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats(?WordFormatEnum $wordFormat = null) {
+    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats(?WordFormatEnum $wordFormat = null): void
+    {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds =[];
         for ($i = 0; $i <= 24; $i++) {
@@ -47,7 +41,8 @@ class BasicGeneratorTest extends TestCase
      * @dataProvider provideFormatOptions
      * @throws UrlGeneratorException
      */
-    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens(?WordFormatEnum $wordFormat = null) {
+    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens(?WordFormatEnum $wordFormat = null): void
+    {
         $generator = new UrlGenerator($this->defaultWordSets, null, '', $wordFormat);
         $firstTwoDozenIds =[];
         for ($i = 0; $i <= 24; $i++) {
@@ -63,7 +58,8 @@ class BasicGeneratorTest extends TestCase
      * @dataProvider provideFormatOptions
      * @throws UrlGeneratorException
      */
-    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator(?WordFormatEnum $wordFormat = null) {
+    public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator(?WordFormatEnum $wordFormat = null): void
+    {
         $generator = new UrlGenerator($this->defaultWordSets, null, null, $wordFormat);
         $firstTwoDozenIds =[];
         for ($i = 0; $i <= 24; $i++) {
@@ -79,7 +75,8 @@ class BasicGeneratorTest extends TestCase
      * @dataProvider provideFormatOptions
      * @throws UrlGeneratorException
      */
-    public function testCanGenerateDozenRandomLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null) {
+    public function testCanGenerateDozenRandomLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null): void
+    {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds =[];
         for ($i = 0; $i <= 12; $i++) {
@@ -95,7 +92,8 @@ class BasicGeneratorTest extends TestCase
      * @dataProvider provideFormatOptions
      * @throws UrlGeneratorException
      */
-    public function testCanGenerateTwoDozenRandomVerLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null) {
+    public function testCanGenerateTwoDozenRandomVerLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null): void
+    {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds =[];
         for ($i = 0; $i <= 24; $i++) {
@@ -105,7 +103,10 @@ class BasicGeneratorTest extends TestCase
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
     }
 
-    public function provideFormatOptions()
+    /**
+     * @return array<array-key, array<array-key, null|WordFormatEnum>>
+     */
+    public function provideFormatOptions(): array
     {
         return [
             [
