@@ -27,7 +27,7 @@ class BasicGeneratorTest extends BaseTestCase
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats(?WordFormatEnum $wordFormat = null): void
     {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
-        $firstTwoDozenIds =[];
+        $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->toURL($i);
         }
@@ -44,7 +44,7 @@ class BasicGeneratorTest extends BaseTestCase
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens(?WordFormatEnum $wordFormat = null): void
     {
         $generator = new UrlGenerator($this->defaultWordSets, null, '', $wordFormat);
-        $firstTwoDozenIds =[];
+        $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->toURL($i);
         }
@@ -61,7 +61,7 @@ class BasicGeneratorTest extends BaseTestCase
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator(?WordFormatEnum $wordFormat = null): void
     {
         $generator = new UrlGenerator($this->defaultWordSets, null, null, $wordFormat);
-        $firstTwoDozenIds =[];
+        $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->toURL($i);
         }
@@ -78,7 +78,7 @@ class BasicGeneratorTest extends BaseTestCase
     public function testCanGenerateDozenRandomLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null): void
     {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
-        $firstTwoDozenIds =[];
+        $firstTwoDozenIds = [];
         for ($i = 0; $i <= 12; $i++) {
             $firstTwoDozenIds[] = $generator->toURL($i + 1024);
         }
@@ -95,7 +95,7 @@ class BasicGeneratorTest extends BaseTestCase
     public function testCanGenerateTwoDozenRandomVerLargeIdsAsVariousFormats(?WordFormatEnum $wordFormat = null): void
     {
         $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
-        $firstTwoDozenIds =[];
+        $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->toURL($i + 4096);
         }
