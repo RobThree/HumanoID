@@ -84,7 +84,7 @@ class UrlGenerator
         }
 
         // Set other properties
-        $this->separator = $separator;
+        $this->separator = $separator ?? '';
 
         if (is_string($format)) {
             $format = strtolower(trim($format));
