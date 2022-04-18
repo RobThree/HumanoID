@@ -144,23 +144,23 @@ class UrlGenerator
         // Initialize value to id value
         $value = $id;
         // Start at last category
-        $catIndex = count($this->categories) - 1;
+        $categoryIndex = count($this->categories) - 1;
         // Array of words we calculated
         $result = [];
         // Get radix
-        $radix = count($this->wordSetData[$this->categories[$catIndex]]);
+        $radix = count($this->wordSetData[$this->categories[$categoryIndex]]);
 
         // Below is basically a decimal to base-N conversion
         // where each N may differ on the number of words in that category
         do {
             // Determine word for this category
-            $result[] = $this->formatWord($this->getWord($catIndex, $value % $radix));
+            $result[] = $this->formatWord($this->getWord($categoryIndex, $value % $radix));
             // Calculate new value
             $value = (int)($value / $radix);
             // Next category (going from highest down to 0, repeating 0 if required)
-            $catIndex = max(--$catIndex, 0);
+            $categoryIndex = max(--$categoryIndex, 0);
             // Get radix
-            $radix = count($this->wordSetData[$this->categories[$catIndex]]);
+            $radix = count($this->wordSetData[$this->categories[$categoryIndex]]);
         } while ($value > 0);
 
         // Return string, glued with optional separator, in correct order
