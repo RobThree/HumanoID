@@ -10,7 +10,7 @@ Usage:
 
 ```php
 // Load words data
-$words = json_decode(file_get_contents('data/words.json'), true);
+$words = json_decode(file_get_contents('data/zoo-words.json'), true);
 
 // Create new instance of UrlGenerator
 $urlgen = new UrlGenerator\UrlGenerator($words);

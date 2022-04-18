@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 header('Content-Type: text/plain');
 
 // Load words
-$words = json_decode(file_get_contents('data/words.json'), true);
+$words = json_decode(file_get_contents('data/zoo-words.json'), true);
 
 // Initialize URL generator
 $urlgen = new RobThree\UrlGenerator\UrlGenerator($words);
