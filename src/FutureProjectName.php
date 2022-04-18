@@ -14,4 +14,14 @@ final class FutureProjectName
             )
         );
     }
+
+    public static function spaceIdGenerator(): UrlGenerator
+    {
+        return new UrlGenerator(
+            json_decode(
+                file_get_contents(__DIR__ . '/../data/space-words.json'),
+                true
+            )
+        );
+    }
 }

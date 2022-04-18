@@ -1,0 +1,42 @@
+{
+  "star-taxonomy": [
+    "Hypergiant",
+    "Supergiant",
+    "Brightgiant",
+    "Giant",
+    "Subgiant",
+    "Dwarf",
+    "Subdwarf",
+    "Whitedwarf",
+    "Reddwarf",
+    "Browndwarf"
+  ],
+  "space-types": [
+    "Geospace",
+    "Interplanetary",
+    "Interstellar",
+    "Intergalactic",
+    "Discovery"
+  ],
+  "dwarf-planets": [
+    "Ceres",
+    "Orcus",
+    "Pluto",
+    "Haumea",
+    "Quaoar",
+    "Makemake",
+    "Gonggong",
+    "Eris",
+    "Sedna"
+  ],
+  "planets": [
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Mars",
+    "Jupiter",
+    "Saturn",
+    "Uranus",
+    "Neptune"
+  ]
+}
