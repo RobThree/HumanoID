@@ -1,23 +1,22 @@
 <?php
 
+use RobThree\UrlGenerator\FutureProjectName;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 header('Content-Type: text/plain');
 
-// Load words
-$words = json_decode(file_get_contents('data/zoo-words.json'), true);
-
-// Initialize URL generator
-$urlgen = new RobThree\UrlGenerator\UrlGenerator($words);
+// Initialize default ZooID style generator
+$zooIdGenerator = FutureProjectName::zooIdGenerator();
 
 // Generate some random id, convert that to a url and then decode it back.
-$randomid = rand(0,9999999);
-echo 'Random id  : ' . $randomid . PHP_EOL;
+$randomId = rand(0,9999999);
+echo 'Random id  : ' . $randomId . PHP_EOL;
 
-$url = $urlgen->toURL($randomid);
+$url = $zooIdGenerator->generate($randomId);
 echo 'As URL     : ' . $url . PHP_EOL;
 
-$decodedid = $urlgen->parseUrl($url);
-echo 'Decoded id : ' . $decodedid . PHP_EOL;
+$decodedId = $zooIdGenerator->parseId($url);
+echo 'Decoded id : ' . $decodedId . PHP_EOL;
 
-echo 'Check      : ' . (($decodedid === $randomid) ? 'OK' : 'FAILED!') . PHP_EOL;
+echo 'Check      : ' . (($decodedId === $randomId) ? 'OK' : 'FAILED!') . PHP_EOL;
