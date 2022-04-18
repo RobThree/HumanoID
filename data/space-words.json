@@ -1,4 +1,19 @@
 {
+  "colors": [
+    "Red",
+    "Brown",
+    "Yellow",
+    "Orange",
+    "White",
+    "Blue"
+  ],
+  "life-cycle": [
+    "Birth",
+    "Main",
+    "Old",
+    "Dying",
+    "Remnant"
+  ],
   "star-taxonomy": [
     "Hypergiant",
     "Supergiant",
@@ -38,5 +53,16 @@
     "Saturn",
     "Uranus",
     "Neptune"
+  ],
+  "galaxies": [
+    "MilkyWay",
+    "Andromeda",
+    "Backward",
+    "Bode",
+    "Cigar",
+    "Pinwheel",
+    "Sombrero",
+    "Tadpole",
+    "Hong"
   ]
 }

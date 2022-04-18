@@ -1,15 +1,15 @@
 [
-    "brightgiant-discovery-pluto-mercury",
-    "brightgiant-discovery-pluto-venus",
-    "brightgiant-discovery-pluto-earth",
-    "brightgiant-discovery-pluto-mars",
-    "brightgiant-discovery-pluto-jupiter",
-    "brightgiant-discovery-pluto-saturn",
-    "brightgiant-discovery-pluto-uranus",
-    "brightgiant-discovery-pluto-neptune",
-    "brightgiant-discovery-haumea-mercury",
-    "brightgiant-discovery-haumea-venus",
-    "brightgiant-discovery-haumea-earth",
-    "brightgiant-discovery-haumea-mars",
-    "brightgiant-discovery-haumea-jupiter"
+    "interplanetary-makemake-venus-tadpole",
+    "interplanetary-makemake-venus-hong",
+    "interplanetary-makemake-earth-milkyway",
+    "interplanetary-makemake-earth-andromeda",
+    "interplanetary-makemake-earth-backward",
+    "interplanetary-makemake-earth-bode",
+    "interplanetary-makemake-earth-cigar",
+    "interplanetary-makemake-earth-pinwheel",
+    "interplanetary-makemake-earth-sombrero",
+    "interplanetary-makemake-earth-tadpole",
+    "interplanetary-makemake-earth-hong",
+    "interplanetary-makemake-mars-milkyway",
+    "interplanetary-makemake-mars-andromeda"
 ]
