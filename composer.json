@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
+        "ext-json": "*",
         "spatie/enum": "^3.12"
     },
     "require-dev": {
