@@ -19,7 +19,7 @@ class ParserExceptionTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets);
         $this->expectException(FutureProjectNameGeneratorException::class);
         $this->expectExceptionMessage('No text specified');
-        $generator->parseId('  ');
+        $generator->parse('  ');
     }
 
     public function testWillThrowExceptionWithInvalidIdInput(): void
@@ -27,6 +27,6 @@ class ParserExceptionTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets);
         $this->expectException(FutureProjectNameGeneratorException::class);
         $this->expectExceptionMessage('Failed to lookup "red-mars-frogs"');
-        $generator->parseId('red-mars-frogs');
+        $generator->parse('red-mars-frogs');
     }
 }

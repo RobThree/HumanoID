@@ -34,7 +34,7 @@ class BasicBuilderTest extends BaseTestCase
         $generator = FutureProjectName::zooIdGenerator();
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i);
+            $firstTwoDozenIds[] = $generator->create($i);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
@@ -48,7 +48,7 @@ class BasicBuilderTest extends BaseTestCase
         $generator = FutureProjectName::zooIdGenerator();
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 12; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i + 1024);
+            $firstTwoDozenIds[] = $generator->create($i + 1024);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);

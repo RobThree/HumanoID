@@ -122,7 +122,7 @@ class FutureProjectNameGenerator
      *
      * @throws FutureProjectNameGeneratorException
      */
-    public function generate(int $id): string
+    public function create(int $id): string
     {
         if ($id < 0) {
             throw new FutureProjectNameGeneratorException('ID must be a positive integer');
@@ -159,7 +159,7 @@ class FutureProjectNameGenerator
      *
      * @throws FutureProjectNameGeneratorException
      */
-    public function parseId(string $text): int
+    public function parse(string $text): int
     {
         // Normalize value
         $value = strtolower(trim($text));

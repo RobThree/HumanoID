@@ -29,7 +29,7 @@ class BasicGeneratorTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i);
+            $firstTwoDozenIds[] = $generator->create($i);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
@@ -46,7 +46,7 @@ class BasicGeneratorTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i);
+            $firstTwoDozenIds[] = $generator->create($i);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
@@ -63,7 +63,7 @@ class BasicGeneratorTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, null, $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i);
+            $firstTwoDozenIds[] = $generator->create($i);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
@@ -80,7 +80,7 @@ class BasicGeneratorTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 12; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i + 1024);
+            $firstTwoDozenIds[] = $generator->create($i + 1024);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
@@ -97,7 +97,7 @@ class BasicGeneratorTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
-            $firstTwoDozenIds[] = $generator->generate($i + 4096);
+            $firstTwoDozenIds[] = $generator->create($i + 4096);
         }
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);

@@ -50,7 +50,7 @@ class BasicParserTest extends BaseTestCase
         ];
 
         for ($i = 0; $i <= 24; $i++) {
-            $this->assertSame($i, $generator->parseId($firstTwoDozenIds[$i]));
+            $this->assertSame($i, $generator->parse($firstTwoDozenIds[$i]));
         }
     }
 }

@@ -63,6 +63,6 @@ class GeneratorExceptionTest extends BaseTestCase
         $generator = new FutureProjectNameGenerator($this->defaultWordSets);
         $this->expectException(FutureProjectNameGeneratorException::class);
         $this->expectExceptionMessage('ID must be a positive integer');
-        $generator->generate(-43);
+        $generator->create(-43);
     }
 }

@@ -13,10 +13,10 @@ $zooIdGenerator = FutureProjectName::zooIdGenerator();
 $randomId = rand(0,9999999);
 echo 'Random id  : ' . $randomId . PHP_EOL;
 
-$url = $zooIdGenerator->generate($randomId);
+$url = $zooIdGenerator->create($randomId);
 echo 'As URL     : ' . $url . PHP_EOL;
 
-$decodedId = $zooIdGenerator->parseId($url);
+$decodedId = $zooIdGenerator->parse($url);
 echo 'Decoded id : ' . $decodedId . PHP_EOL;
 
 echo 'Check      : ' . (($decodedId === $randomId) ? 'OK' : 'FAILED!') . PHP_EOL;
