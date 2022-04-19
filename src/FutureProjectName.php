@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RobThree\UrlGenerator;
 
 // This is literally a placeholder name for w/e we end up picking the new name as.
