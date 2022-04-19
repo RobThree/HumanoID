@@ -1,26 +1,27 @@
 # URL Generator
 
-This class can be used to generate "friendly url's" where numerical id's are replaced with words. A well known example is [Gfycat]([https://gfycat.com/about](https://gfycat.com/about)) which uses "`adjectiveadjectiveanimal`": [`https://gfycat.com/gracefulspanishgemsbuck`](https://gfycat.com/gracefulspanishgemsbuck).
+This class can be used to generate "friendly url's" where numerical ID's are replaced with words.
+A well known example is [Gfycat]([https://gfycat.com/about](https://gfycat.com/about)) which uses 
+"`adjectiveadjectiveanimal`": [`https://gfycat.com/gracefulspanishgemsbuck`](https://gfycat.com/gracefulspanishgemsbuck).
 
-This class has two methods: `toURL(int $id)` which returns a string generated from the id and `parseUrl(string $text)` which returns the id from the parsed text. It supports custom word / category lists, an optional separator and optional formatting.
+This class has two methods: `toURL(int $id)` which returns a string generated from the id and 
+`parseUrl(string $text)` which returns the id from the parsed text. It supports custom 
+word / category lists, an optional separator and optional formatting.
 
 ## Quickstart
 
 Usage:
 
 ```php
-// Load words data
-$words = json_decode(file_get_contents('data/zoo-words.json'), true);
+// Create new instance of FutureProjectNameGenerator via the builder
+$zooIdGen = new \RobThree\UrlGenerator\FutureProjectName::zooIdGenerator();
 
-// Create new instance of FutureProjectNameGenerator
-$urlgen = new UrlGenerator\UrlGenerator($words);
-
-// Convert ID to URL
-$url = $urlgen->toUrl(96712);
+// Convert ID to ZooID for use in URL
+$urlZooId = $zooIdGen->create(96712);
 echo sprintf("URL: '%s'\n", $url);
     
-// Convert URL to ID
-$id = $urlgen->parseUrl($url);
+// After extracting ZooID slug from URL, convert back to ID
+$id = $zooIdGen->parse($urlZooId);
 echo sprintf("Decoded ID: %d\n", $id);
 ```
 
@@ -33,22 +34,22 @@ Decoded ID: 96712
 
 ## API
 
-The `UrlGenerator` has a constructor with 4 arguments; all of which but the first are optional:
+The `FutureProjectNameGenerator` has a constructor with 4 arguments; all of which but the first are optional:
 
-- `$words`: The words-structure ([see below](#word-lists-and-categories)) to use as 'dictionary'
+- `$wordSets`: The words-structure ([see below](#word-lists-and-categories)) to use as 'dictionary'
 - `$categories` (*optional*, [see below](#word-lists-and-categories)): if you want to use a different order for categories than the default order (which is the order of the keys of the `$words` argument)
 - `$separator` (*optional*, [see below](#separator)): the separator, if any, to use
 - `$format` (*optional*, [see below](#formats)): the format to use
 
-The `UrlGenerator` has two public methods:
+The `FutureProjectNameGenerator` has two public methods:
 
-- `toUrl(int $id)`: Converts an integer into a URL
-- `parseUrl(string $text)`: Converts text into an integer
+- `create(int $id): string`: Converts an integer into an ID
+- `parse(string $text): int`: Converts text into an integer
 
     
 ## Word lists and categories
 
-You can use custom word lists; you can store these anywhere you want like in a JSON file or in a database. As long as you initialize the `UrlGenerator` class with the following data structure:
+You can use custom word lists; you can store these anywhere you want like in a JSON file or in a database. As long as you initialize the `FutureProjectNameGenerator` class with the following data structure:
 
     [
         "adjectives" => ["big", "smart", "funky"],
@@ -56,39 +57,76 @@ You can use custom word lists; you can store these anywhere you want like in a J
         "animals"    => ["cow","whale","monkey"]
     ]
 
-The `UrlGenerator` will automatically determine which 'categories' are available. In the above example generated url's would take the form `adjective-color-animal`. Whenever this should turn out to be not enough, the `UrlGenerator` automatically repeats the first category as often as needed; so this would result in `adjective-adjective-color-animal` or even `adjective-adjective-adjective-color-animal` and so on. However, the order of the categories can be specified by passing an array of words to the `$categories` argument of the `UrlGenerator` class. You could, for example, pass `['colors','adjectives','animals']` which will result in url's that take the form `color-adjective-animal` or, again, when this should not be enough: `color-color-color-adjective-animal`.
+The `FutureProjectNameGenerator` will automatically determine which 'categories' are available. In the above example generated url's would take the form `adjective-color-animal`. Whenever this should turn out to be not enough, the `FutureProjectNameGenerator` automatically repeats the first category as often as needed; so this would result in `adjective-adjective-color-animal` or even `adjective-adjective-adjective-color-animal` and so on. However, the order of the categories can be specified by passing an array of words to the `$categories` argument of the `FutureProjectNameGenerator` class. You could, for example, pass `['colors','adjectives','animals']` which will result in url's that take the form `color-adjective-animal` or, again, when this should not be enough: `color-color-color-adjective-animal`.
 
 Ofcourse you don't have to use adjectives, colors and animals. It can be anything you want. So, more generalized, you can provide any data structure in the form
 
     [
-        "cateogory" =>  ["value", "value", "value", ...],
-        "cateogory" =>  ["value", "value", "value", ...],
+        "cateogory1" =>  ["value", "value", "value", ...],
+        "cateogory2" =>  ["value", "value", "value", ...],
         ...
     ]
     
 ## Separator
 
-By default `UrlGenerator` uses the `-` character to separate words. This results in urls like `big-red-whale`. You can specify any desired string as a separator; it helps if the separator string is not contained in any of the words. It is possible to specify an empty (`''`) or `null` separator. This wil result in urls like `bigredwhale`. This is the closest to what Gfycat url's look like. However, you need to take extreme care that the words don't overlap. If, for example, the adjectives would contain both `old` and `cold` a url like `genericoldpanda` will result in an ambiguous result ("generi", "**cold**", "panda" vs. "generi**c"**, "**old**", "panda"). With a carefully generated wordlist this shouldn't have to be a problem.
+By default `FutureProjectNameGenerator` uses the `-` character to separate words. This results in urls like `big-red-whale`. 
+You can specify any desired string as a separator; it helps if the separator string is not contained in any of the words. 
+
+It is possible to specify an empty (`''`) or `null` separator. This will result in urls like `bigredwhale`. 
+This is the closest to what Gfycat url's look like. However, you need to take extreme care that the words don't overlap.
+If, for example, the adjectives would contain both `old` and `cold` a url like `genericoldpanda` will result in an 
+ambiguous result ("generi", "**cold**", "panda" vs. "generi**c"**, "**old**", "panda").
+With a carefully generated wordlist this shouldn't have to be a problem.
 
 ## Formats
 
-A few formats are supported which can, again, be specified when constructing an instance of the `UrlGenerator` class. The currently supported formats are `ucfirst`, `lcfirst`, `upper`, `lower` and no-format (either an empty string (`''`) or `null`). All options do what their name implies; so `ucfirst` would result in `Big-Red-Whale` and `upper` in `BIG-RED-WHALE`. The "no-format" option just keeps the words in tact.
+A few formats are supported which can be specified when constructing an instance of the `FutureProjectNameGenerator` class.
+The currently supported formats are provided via a `WordFormatOption` Enum class.
+
+The options provided are:
+- `WordFormatOption::ucfirst`,
+- `WordFormatOption::lcfirst`,
+- `WordFormatOption::upper`,
+- `WordFormatOption::lower`, and 
+- no-format (`null`).
+
+All options do what their name implies; so `ucfirst` would result in `Big-Red-Whale` and `upper` in `BIG-RED-WHALE`.
+The "no-format" option just keeps the words intact as formatted from the provided wordset.
 
 ## How it works
 
-### ID (integer) to URL conversion
+### ID (integer) to FutureProjectNameID conversion
 
-The `toUrl(int $id)` method takes the ID and, basically, does a [base conversion]([https://en.wikipedia.org/wiki/Numeral_system](https://en.wikipedia.org/wiki/Numeral_system)) similarly to how you would convert the decimal value `967` to the hexadecimal value `3C7`.  However, this time we don't have 16 'digits' (0..9, A..F) but any number of words representing a digit.
+The `create(int $id): string` method takes the ID and, basically, does 
+a [base conversion]([https://en.wikipedia.org/wiki/Numeral_system](https://en.wikipedia.org/wiki/Numeral_system)) similarly 
+to how you would convert the decimal value `967` to the hexadecimal value `3C7`.
 
-### URL to ID (integer) conversion
+However, this time we don't have 16 'digits' (0..9, A..F), but any number of words representing a digit.
 
-The `parseUrl(string $text)`method does, basically the opposite of the `toUrl(int $id)` method; it takes a string and tries to do another base conversion, similarly as how you would convert the hexadecimal value `3C7` to the decimal value `967`. However, this time it's a bit more complicated...
+### FutureProjectNameID to ID (integer) conversion
 
-**If** we could assume there will always be a separator 'per digit' in the string, we could simply split the string at the separator and do our calculations. Even if the separator would not be used but, for example, the `ucfirst` option (resulting in `BigRedWhale`) we could split out the words pretty easily. **However**; I wanted to stay as close as possible to the Gfycat implementation. And that complicates things. It, basically, meant I had the following requirements: the url should be case insensitive *and* contain an *optional* separator.
+The `parse(string $text): int` method does, basically the opposite of the `create` method; it takes a string and 
+tries to do another base conversion, similarly as how you would convert the hexadecimal value `3C7` to the 
+decimal value `967`. However, this time it's a bit more complicated...
 
-The 'decoding' of a URL relies on a lookup table which is created when the `UrlGenerator` class is initialized (which, by the way, is a pretty expensive operation; keep the instance around as long as you can if you need to generate or parse more than one URL!). I won't go into too much detail, but in essence a tree is created on a per-character-basis in reverse order. When decoding a URL the algorithm starts at the end working it's way to the beginning of the string while meanwhile working it's way down this tree and looking up word indices in their respective categories. Whenever an index is determined it can be used in the 'base-N' conversion and the algorithm continues until the beginning of the URL is reached or a lookup failed.
+**If** we could assume there will always be a separator 'per digit' in the string, we could simply split the string 
+at the separator and do our calculations. Even if the separator would not be used but, for example, the `ucfirst` option 
+(resulting in `BigRedWhale`) we could split out the words pretty easily.
 
-## General advise
+**However**; I wanted to stay as close as possible to the Gfycat implementation. And that complicates things.
+It, basically, meant I had the following requirements: the url should be case insensitive *and* contain an *optional* separator.
+
+The 'decoding' of a URL relies on a lookup table which is created when the `FutureProjectNameGenerator` class 
+is initialized (which, by the way, is a pretty expensive operation; keep the instance around as long as you can 
+if you need to generate or parse more than one URL!).
+
+I won't go into too much detail, but in essence a tree is created on a per-character-basis in reverse order.
+When decoding a URL the algorithm starts at the end working it's way to the beginning of the string while meanwhile 
+working it's way down this tree and looking up word indices in their respective categories. Whenever an index is 
+determined it can be used in the 'base-N' conversion and the algorithm continues until the beginning of the URL 
+is reached or a lookup failed.
+
+## General advice
 
 - **Don't** change your wordlist once you go into production. Imagine reassigning or reordering the value of the values `A..F` in the hexadecimal system. It will be very hard, if not impossible, to make this work correctly without resulting in incorrectly converted URL's to ID's or causing ambiguous results etc.
 - Use large word-lists. *Don't go overboard*, but categories with a handful of words don't help much (*unless* you don't mind either long url's (`red-blue-blue-red-red-blue-funky-monkey` for example) or have some more smaller categories).
