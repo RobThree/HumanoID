@@ -2,6 +2,6 @@
 
 namespace RobThree\UrlGenerator;
 
-class UrlGeneratorException extends \Exception
+class FutureProjectNameGeneratorException extends \Exception
 {
 }
