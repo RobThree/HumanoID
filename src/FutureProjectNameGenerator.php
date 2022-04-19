@@ -52,23 +52,20 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
      */
     public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', ?WordFormatEnum $format = null)
     {
+        // Ensure we have a list of wordsets
         if (count($wordSets) === 0) {
             throw new FutureProjectNameGeneratorException('No words specified');
         }
-        $this->wordSetData = $wordSets;
-
-        // No categories specified? "Autodetect" categories to use
-        if ($categories === null) {
-            $categories = array_keys($this->wordSetData);
-        }
-
-        // Ensure we have categories
-        if (count($categories) === 0) {
+        // Ensure we have categories, or null was passed for 'autodetect'
+        if ($categories !== null && count($categories) === 0) {
             throw new FutureProjectNameGeneratorException(
                 'Categories must be either: unset (enables autodetect), or an array with size > 0, or unset'
             );
         }
-        $this->categories = $categories;
+
+        $this->wordSetData = $wordSets;
+        // No categories specified, then "Autodetect" categories to use
+        $this->categories = $categories ?? array_keys($this->wordSetData);
 
         // Check categories and build lookup table
         foreach (array_unique($this->categories) as $categoryName) {
