@@ -6,7 +6,7 @@ namespace RobThree\UrlGenerator;
 
 use Throwable;
 
-class FutureProjectNameGenerator
+class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
 {
     /**
      * Key for lookup array to store a lookup result (index).
