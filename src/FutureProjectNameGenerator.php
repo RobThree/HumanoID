@@ -50,8 +50,12 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
      *
      * @throws FutureProjectNameGeneratorException
      */
-    public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', ?WordFormatEnum $format = null)
-    {
+    public function __construct(
+        array $wordSets,
+        ?array $categories = null,
+        ?string $separator = '-',
+        ?WordFormatEnum $format = null
+    ) {
         // Ensure we have a list of wordsets
         if (count($wordSets) === 0) {
             throw new FutureProjectNameGeneratorException('No words specified');

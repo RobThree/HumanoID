@@ -40,6 +40,7 @@ class GeneratorExceptionTest extends BaseTestCase
     public function testWillThrowExceptionOnIncorrectFormat(): void
     {
         $this->expectException(TypeError::class);
+        // @phpstan-ignore-next-line
         new FutureProjectNameGenerator($this->defaultWordSets, null, '-', 'sArCasTic');
     }
 
