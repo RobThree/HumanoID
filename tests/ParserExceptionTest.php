@@ -19,7 +19,7 @@ class ParserExceptionTest extends BaseTestCase
         $generator = new UrlGenerator($this->defaultWordSets);
         $this->expectException(UrlGeneratorException::class);
         $this->expectExceptionMessage('No text specified');
-        $generator->parseUrl('  ');
+        $generator->parseId('  ');
     }
 
     public function testWillThrowExceptionWithInvalidIdInput(): void
@@ -27,6 +27,6 @@ class ParserExceptionTest extends BaseTestCase
         $generator = new UrlGenerator($this->defaultWordSets);
         $this->expectException(UrlGeneratorException::class);
         $this->expectExceptionMessage('Failed to lookup "red-mars-frogs"');
-        $generator->parseUrl('red-mars-frogs');
+        $generator->parseId('red-mars-frogs');
     }
 }

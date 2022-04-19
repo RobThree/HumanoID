@@ -119,18 +119,6 @@ class UrlGenerator
     }
 
     /**
-     * Converts an id into a URL value
-     * @throws UrlGeneratorException
-     * @deprecated This method will be removed in a future release. Use the `generate` method instead.
-
-     */
-    public function toURL(int $id): string
-    {
-        return $this->generate($id);
-    }
-
-
-    /**
      * Convert an integer to its respective generated {PACKAGE_NAME} ID based on the current config.
      *
      * @throws UrlGeneratorException
@@ -166,17 +154,6 @@ class UrlGenerator
         // Return string, glued with optional separator, in correct order
         return implode($this->separator, array_reverse($result));
     }
-
-    /**
-     * Parses a URL value and returns the integer equivalent
-     * @throws UrlGeneratorException
-     * @deprecated This method will be removed in a future release. Use the `parseId` method instead.
-     */
-    public function parseUrl(string $text): int
-    {
-        return $this->parseId($text);
-    }
-
 
     /**
      * Parses an {PACKAGE_NAME} ID value and returns the integer equivalent
