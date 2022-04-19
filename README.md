@@ -12,7 +12,7 @@ Usage:
 // Load words data
 $words = json_decode(file_get_contents('data/zoo-words.json'), true);
 
-// Create new instance of UrlGenerator
+// Create new instance of FutureProjectNameGenerator
 $urlgen = new UrlGenerator\UrlGenerator($words);
 
 // Convert ID to URL

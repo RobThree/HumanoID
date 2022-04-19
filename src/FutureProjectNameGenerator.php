@@ -6,7 +6,7 @@ namespace RobThree\UrlGenerator;
 
 use Throwable;
 
-class UrlGenerator
+class FutureProjectNameGenerator
 {
     /**
      * Key for lookup array to store a lookup result (index).
@@ -47,12 +47,12 @@ class UrlGenerator
      * @param null|array<array-key, string|mixed> $categories
      * @param null|string|WordFormatEnum $format
      *
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', $format = null)
     {
         if (count($wordSets) === 0) {
-            throw new UrlGeneratorException('No words specified');
+            throw new FutureProjectNameGeneratorException('No words specified');
         }
         $this->wordSetData = $wordSets;
 
@@ -63,7 +63,7 @@ class UrlGenerator
 
         // Ensure we have categories
         if (count($categories) === 0) {
-            throw new UrlGeneratorException(
+            throw new FutureProjectNameGeneratorException(
                 'Categories must be either: unset (enables autodetect), or an array with size > 0, or unset'
             );
         }
@@ -72,7 +72,7 @@ class UrlGenerator
         // Check categories and build lookup table
         foreach (array_unique($this->categories) as $categoryName) {
             if (!is_string($categoryName) || strlen($categoryName) === 0) {
-                throw new UrlGeneratorException(sprintf('Category "%s" is invalid', $categoryName));
+                throw new FutureProjectNameGeneratorException(sprintf('Category "%s" is invalid', $categoryName));
             }
             if (
                 !array_key_exists($categoryName, $this->wordSetData) ||
@@ -83,7 +83,7 @@ class UrlGenerator
                     'Category "%s" not found in datafile, category is not an array or category is an empty array',
                     $categoryName
                 );
-                throw new UrlGeneratorException($message);
+                throw new FutureProjectNameGeneratorException($message);
             }
 
             // Ensure unique and normalized values
@@ -109,7 +109,7 @@ class UrlGenerator
             try {
                 $formatEnum = WordFormatEnum::from($format);
             } catch (Throwable $throwable) {
-                throw new UrlGeneratorException(sprintf('Unsupported format "%s"', $format));
+                throw new FutureProjectNameGeneratorException(sprintf('Unsupported format "%s"', $format));
             }
             $this->format = $formatEnum;
         } else {
@@ -120,12 +120,12 @@ class UrlGenerator
     /**
      * Convert an integer to its respective generated {PACKAGE_NAME} ID based on the current config.
      *
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function generate(int $id): string
     {
         if ($id < 0) {
-            throw new UrlGeneratorException('ID must be a positive integer');
+            throw new FutureProjectNameGeneratorException('ID must be a positive integer');
         }
 
         // Initialize value to id value
@@ -157,7 +157,7 @@ class UrlGenerator
     /**
      * Parses an {PACKAGE_NAME} ID value and returns the integer equivalent
      *
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function parseId(string $text): int
     {
@@ -165,7 +165,7 @@ class UrlGenerator
         $value = strtolower(trim($text));
         // Ensure we have something to parse
         if (strlen($value) === 0) {
-            throw new UrlGeneratorException('No text specified');
+            throw new FutureProjectNameGeneratorException('No text specified');
         }
 
         // Initialize step
@@ -190,7 +190,7 @@ class UrlGenerator
                 $catIndex = max(--$catIndex, 0);
             }
         } catch (\Exception $ex) {
-            throw new UrlGeneratorException(sprintf('Failed to lookup "%s"', $text));
+            throw new FutureProjectNameGeneratorException(sprintf('Failed to lookup "%s"', $text));
         }
         // Return calculated ID
         return $result;
@@ -225,7 +225,8 @@ class UrlGenerator
 
     /**
      * Returns the index of a word in the given category
-     * @throws UrlGeneratorException
+     *
+     * @throws FutureProjectNameGeneratorException
      */
     private function lookupWordIndex(string $category, string $word): int
     {
@@ -246,7 +247,7 @@ class UrlGenerator
             return $lastIx;
         }
 
-        throw new UrlGeneratorException(sprintf('Failed to lookup "%s"', $word));
+        throw new FutureProjectNameGeneratorException(sprintf('Failed to lookup "%s"', $word));
     }
 
     /**

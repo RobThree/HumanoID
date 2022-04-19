@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace RobThree\UrlGenerator\Test;
 
 use RobThree\UrlGenerator\FutureProjectName;
-use RobThree\UrlGenerator\UrlGenerator;
-use RobThree\UrlGenerator\UrlGeneratorException;
+use RobThree\UrlGenerator\FutureProjectNameGenerator;
+use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
 use RobThree\UrlGenerator\WordFormatEnum;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**
  * This set of tests will cover only the most basic kinds of generation tests.
  *
- * @see UrlGenerator
+ * @see FutureProjectNameGenerator
  */
 class BasicBuilderTest extends BaseTestCase
 {
@@ -23,11 +23,11 @@ class BasicBuilderTest extends BaseTestCase
     {
         $generator = FutureProjectName::zooIdGenerator();
         $this->assertIsObject($generator);
-        $this->assertInstanceOf(UrlGenerator::class, $generator);
+        $this->assertInstanceOf(FutureProjectNameGenerator::class, $generator);
     }
 
     /**
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testDefaultGeneratorCanGenerateFirstTwoDozen(): void
     {
@@ -41,7 +41,7 @@ class BasicBuilderTest extends BaseTestCase
     }
 
     /**
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testDefaultGeneratorCanGenerateDozenLargeIds(): void
     {

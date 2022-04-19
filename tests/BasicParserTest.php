@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace RobThree\UrlGenerator\Test;
 
-use RobThree\UrlGenerator\UrlGenerator;
-use RobThree\UrlGenerator\UrlGeneratorException;
+use RobThree\UrlGenerator\FutureProjectNameGenerator;
+use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
 use RobThree\UrlGenerator\WordFormatEnum;
 
 /**
  * This set of tests will cover only the most basic kinds of parsing tests.
  *
- * @see UrlGenerator
+ * @see FutureProjectNameGenerator
  */
 class BasicParserTest extends BaseTestCase
 {
     /**
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testCanParseIdIntoInt(): void
     {
-        $generator = new UrlGenerator($this->defaultWordSets, null, '-', WordFormatEnum::ucfirst());
+        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', WordFormatEnum::ucfirst());
         $firstTwoDozenIds = [
             "Dog",
             "Cat",

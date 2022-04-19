@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace RobThree\UrlGenerator\Test;
 
-use RobThree\UrlGenerator\UrlGenerator;
-use RobThree\UrlGenerator\UrlGeneratorException;
+use RobThree\UrlGenerator\FutureProjectNameGenerator;
+use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
 use RobThree\UrlGenerator\WordFormatEnum;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**
  * This set of tests will cover only the most basic kinds of generation tests.
  *
- * @see UrlGenerator
+ * @see FutureProjectNameGenerator
  */
 class BasicGeneratorTest extends BaseTestCase
 {
@@ -22,11 +22,11 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatEnum|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats($wordFormat = null): void
     {
-        $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
+        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->generate($i);
@@ -39,11 +39,11 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatEnum|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens($wordFormat = null): void
     {
-        $generator = new UrlGenerator($this->defaultWordSets, null, '', $wordFormat);
+        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->generate($i);
@@ -56,11 +56,11 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatEnum|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator($wordFormat = null): void
     {
-        $generator = new UrlGenerator($this->defaultWordSets, null, null, $wordFormat);
+        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, null, $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->generate($i);
@@ -73,11 +73,11 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatEnum|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateDozenRandomLargeIdsAsVariousFormats($wordFormat = null): void
     {
-        $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
+        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 12; $i++) {
             $firstTwoDozenIds[] = $generator->generate($i + 1024);
@@ -90,11 +90,11 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatEnum|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws UrlGeneratorException
+     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTwoDozenRandomVerLargeIdsAsVariousFormats($wordFormat = null): void
     {
-        $generator = new UrlGenerator($this->defaultWordSets, null, '-', $wordFormat);
+        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->generate($i + 4096);
