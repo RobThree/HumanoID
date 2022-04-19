@@ -38,7 +38,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
     /**
      * Separator to use, if any
      */
-    private string $separator = '';
+    private string $separator = '-';
 
     private ?WordFormatOption $format;
 
