@@ -44,8 +44,9 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
 
     /**
      * @param array<string, array<array-key, string|mixed>|mixed> $wordSets
-     * @param null|array<array-key, string|mixed> $categories
-     * @param null|WordFormatEnum $format
+     * @param null|array<array-key, string|mixed>                 $categories
+     * @param null|string                                         $separator
+     * @param null|WordFormatEnum                                 $format
      *
      * @throws FutureProjectNameGeneratorException
      */
