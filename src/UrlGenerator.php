@@ -27,18 +27,18 @@ class UrlGenerator
      *
      * @var array<array-key, string>
      */
-    private array $categories;
+    private array $categories = [];
 
     /**
      * Will hold (reversed)string lookup to word index data
      * @var array<string, mixed>
      */
-    private array $lookup;
+    private array $lookup = [];
 
     /**
      * Separator to use, if any
      */
-    private string $separator;
+    private string $separator = '';
 
     private ?WordFormatEnum $format;
 
@@ -68,7 +68,6 @@ class UrlGenerator
             );
         }
         $this->categories = $categories;
-        $this->lookup = [];
 
         // Check categories and build lookup table
         foreach (array_unique($this->categories) as $categoryName) {
