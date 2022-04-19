@@ -124,9 +124,6 @@ class BasicGeneratorTest extends BaseTestCase
             [
                 WordFormatEnum::upper(),
             ],
-            [
-                'lower',
-            ],
         ];
     }
 }

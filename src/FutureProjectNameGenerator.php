@@ -45,11 +45,11 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
     /**
      * @param array<string, array<array-key, string|mixed>|mixed> $wordSets
      * @param null|array<array-key, string|mixed> $categories
-     * @param null|string|WordFormatEnum $format
+     * @param null|WordFormatEnum $format
      *
      * @throws FutureProjectNameGeneratorException
      */
-    public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', $format = null)
+    public function __construct(array $wordSets, ?array $categories = null, ?string $separator = '-', ?WordFormatEnum $format = null)
     {
         if (count($wordSets) === 0) {
             throw new FutureProjectNameGeneratorException('No words specified');
@@ -104,17 +104,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
         // Set other properties
         $this->separator = $separator ?? '';
 
-        if (is_string($format)) {
-            $format = strtolower(trim($format));
-            try {
-                $formatEnum = WordFormatEnum::from($format);
-            } catch (Throwable $throwable) {
-                throw new FutureProjectNameGeneratorException(sprintf('Unsupported format "%s"', $format));
-            }
-            $this->format = $formatEnum;
-        } else {
-            $this->format = $format;
-        }
+        $this->format = $format;
     }
 
     /**

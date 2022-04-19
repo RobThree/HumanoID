@@ -7,6 +7,7 @@ namespace RobThree\UrlGenerator\Test;
 use PHPUnit\Framework\TestCase;
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
 use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
+use TypeError;
 
 /**
  * This set of tests will cover only the most basic kinds of tests.
@@ -38,8 +39,7 @@ class GeneratorExceptionTest extends BaseTestCase
 
     public function testWillThrowExceptionOnIncorrectFormat(): void
     {
-        $this->expectException(FutureProjectNameGeneratorException::class);
-        $this->expectExceptionMessage('Unsupported format "sarcastic"');
+        $this->expectException(TypeError::class);
         new FutureProjectNameGenerator($this->defaultWordSets, null, '-', 'sArCasTic');
     }
 
