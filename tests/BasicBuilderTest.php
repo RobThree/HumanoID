@@ -7,7 +7,7 @@ namespace RobThree\UrlGenerator\Test;
 use RobThree\UrlGenerator\FutureProjectName;
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
 use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
-use RobThree\UrlGenerator\WordFormatEnum;
+use RobThree\UrlGenerator\WordFormatOption;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**

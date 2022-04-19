@@ -9,7 +9,7 @@ final class FutureProjectName
 {
     public static function zooIdGenerator(
         ?string $separator = '-',
-        ?WordFormatEnum $format = null
+        ?WordFormatOption $format = null
     ): FutureProjectNameGenerator {
         return new FutureProjectNameGenerator(
             json_decode(
@@ -24,7 +24,7 @@ final class FutureProjectName
 
     public static function spaceIdGenerator(
         ?string $separator = '-',
-        ?WordFormatEnum $format = null
+        ?WordFormatOption $format = null
     ): FutureProjectNameGenerator {
         return new FutureProjectNameGenerator(
             json_decode(

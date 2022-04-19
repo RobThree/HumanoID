@@ -40,13 +40,13 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
      */
     private string $separator = '';
 
-    private ?WordFormatEnum $format;
+    private ?WordFormatOption $format;
 
     /**
      * @param array<string, array<array-key, string|mixed>|mixed> $wordSets
      * @param null|array<array-key, string|mixed>                 $categories
      * @param null|string                                         $separator
-     * @param null|WordFormatEnum                                 $format
+     * @param null|WordFormatOption                               $format
      *
      * @throws FutureProjectNameGeneratorException
      */
@@ -54,7 +54,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
         array $wordSets,
         ?array $categories = null,
         ?string $separator = '-',
-        ?WordFormatEnum $format = null
+        ?WordFormatOption $format = null
     ) {
         // Ensure we have a list of wordsets
         if (count($wordSets) === 0) {
@@ -202,13 +202,13 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
     private function formatWord(string $word): string
     {
         switch ($this->format) {
-            case WordFormatEnum::ucfirst():
+            case WordFormatOption::ucfirst():
                 return ucfirst($word);
-            case WordFormatEnum::lcfirst():
+            case WordFormatOption::lcfirst():
                 return lcfirst($word);
-            case WordFormatEnum::upper():
+            case WordFormatOption::upper():
                 return strtoupper($word);
-            case WordFormatEnum::lower():
+            case WordFormatOption::lower():
                 return strtolower($word);
             default:
                 return $word;

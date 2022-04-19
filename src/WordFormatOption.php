@@ -12,6 +12,6 @@ use Spatie\Enum\Enum;
  * @method static self upper()
  * @method static self lower()
  */
-class WordFormatEnum extends Enum
+class WordFormatOption extends Enum
 {
 }

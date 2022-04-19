@@ -6,7 +6,7 @@ namespace RobThree\UrlGenerator\Test;
 
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
 use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
-use RobThree\UrlGenerator\WordFormatEnum;
+use RobThree\UrlGenerator\WordFormatOption;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**
@@ -19,7 +19,7 @@ class BasicGeneratorTest extends BaseTestCase
     use MatchesSnapshots;
 
     /**
-     * @param null|WordFormatEnum|string $wordFormat
+     * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
      * @throws FutureProjectNameGeneratorException
@@ -36,7 +36,7 @@ class BasicGeneratorTest extends BaseTestCase
     }
 
     /**
-     * @param null|WordFormatEnum|string $wordFormat
+     * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
      * @throws FutureProjectNameGeneratorException
@@ -53,7 +53,7 @@ class BasicGeneratorTest extends BaseTestCase
     }
 
     /**
-     * @param null|WordFormatEnum|string $wordFormat
+     * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
      * @throws FutureProjectNameGeneratorException
@@ -70,7 +70,7 @@ class BasicGeneratorTest extends BaseTestCase
     }
 
     /**
-     * @param null|WordFormatEnum|string $wordFormat
+     * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
      * @throws FutureProjectNameGeneratorException
@@ -87,7 +87,7 @@ class BasicGeneratorTest extends BaseTestCase
     }
 
     /**
-     * @param null|WordFormatEnum|string $wordFormat
+     * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
      * @throws FutureProjectNameGeneratorException
@@ -104,7 +104,7 @@ class BasicGeneratorTest extends BaseTestCase
     }
 
     /**
-     * @return array<array-key, array<array-key, null|WordFormatEnum|string>>
+     * @return array<array-key, array<array-key, null|WordFormatOption|string>>
      */
     public function provideFormatOptions(): array
     {
@@ -113,16 +113,16 @@ class BasicGeneratorTest extends BaseTestCase
                 null,
             ],
             [
-                WordFormatEnum::ucfirst(),
+                WordFormatOption::ucfirst(),
             ],
             [
-                WordFormatEnum::lcfirst(),
+                WordFormatOption::lcfirst(),
             ],
             [
-                WordFormatEnum::lower(),
+                WordFormatOption::lower(),
             ],
             [
-                WordFormatEnum::upper(),
+                WordFormatOption::upper(),
             ],
         ];
     }
