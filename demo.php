@@ -6,17 +6,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 header('Content-Type: text/plain');
 
-// Initialize default ZooID style generator
-$zooIdGenerator = HumanoIDs::zooIdGenerator();
+// Create new instance of HumanoID via the builder
+$zooIdGen = HumanoIDs::zooIdGenerator();
 
-// Generate some random id, convert that to a HumanoID and then decode it back.
-$randomId = rand(0,9999999);
-echo 'Random id  : ' . $randomId . PHP_EOL;
-
-$hid = $zooIdGenerator->create($randomId);
-echo 'As HumanoID: ' . $hid . PHP_EOL;
-
-$decodedId = $zooIdGenerator->parse($hid);
-echo 'Decoded id : ' . $decodedId . PHP_EOL;
-
-echo 'Check      : ' . (($decodedId === $randomId) ? 'OK' : 'FAILED!') . PHP_EOL;
+// Convert ID to HumanoID
+$zooId = $zooIdGen->create(96712);
+echo sprintf("HumanoID   : %s\n", $zooId);
+    
+// Convert back to ID
+$id = $zooIdGen->parse($zooId);
+echo sprintf("Decoded ID : %d\n", $id);
