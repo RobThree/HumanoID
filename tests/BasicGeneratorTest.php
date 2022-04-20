@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RobThree\UrlGenerator\Test;
 
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
-use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
 use RobThree\UrlGenerator\WordFormatOption;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -22,7 +21,6 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats($wordFormat = null): void
     {
@@ -39,7 +37,6 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens($wordFormat = null): void
     {
@@ -56,7 +53,6 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator($wordFormat = null): void
     {
@@ -73,7 +69,6 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateDozenRandomLargeIdsAsVariousFormats($wordFormat = null): void
     {
@@ -90,7 +85,6 @@ class BasicGeneratorTest extends BaseTestCase
      * @param null|WordFormatOption|string $wordFormat
      *
      * @dataProvider provideFormatOptions
-     * @throws FutureProjectNameGeneratorException
      */
     public function testCanGenerateTwoDozenRandomVerLargeIdsAsVariousFormats($wordFormat = null): void
     {

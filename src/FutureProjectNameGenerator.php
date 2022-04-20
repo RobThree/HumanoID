@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace RobThree\UrlGenerator;
 
-use Throwable;
+use RobThree\UrlGenerator\Exceptions\InvalidArgumentException;
+use RobThree\UrlGenerator\Exceptions\LookUpFailureException;
 
 class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
 {
@@ -47,8 +48,6 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
      * @param null|array<array-key, string|mixed>                 $categories
      * @param null|string                                         $separator
      * @param null|WordFormatOption                               $format
-     *
-     * @throws FutureProjectNameGeneratorException
      */
     public function __construct(
         array $wordSets,
@@ -58,11 +57,11 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
     ) {
         // Ensure we have a list of wordsets
         if (count($wordSets) === 0) {
-            throw new FutureProjectNameGeneratorException('No words specified');
+            throw new InvalidArgumentException('No words specified');
         }
         // Ensure we have categories, or null was passed for 'autodetect'
         if ($categories !== null && count($categories) === 0) {
-            throw new FutureProjectNameGeneratorException(
+            throw new InvalidArgumentException(
                 'Categories must be either: unset (enables autodetect), or an array with size > 0, or unset'
             );
         }
@@ -74,7 +73,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
         // Check categories and build lookup table
         foreach (array_unique($this->categories) as $categoryName) {
             if (!is_string($categoryName) || strlen($categoryName) === 0) {
-                throw new FutureProjectNameGeneratorException(sprintf('Category "%s" is invalid', $categoryName));
+                throw new LookUpFailureException(sprintf('Category "%s" is invalid', $categoryName));
             }
             if (
                 !array_key_exists($categoryName, $this->wordSetData) ||
@@ -85,7 +84,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
                     'Category "%s" not found in datafile, category is not an array or category is an empty array',
                     $categoryName
                 );
-                throw new FutureProjectNameGeneratorException($message);
+                throw new LookUpFailureException($message);
             }
 
             // Ensure unique and normalized values
@@ -111,13 +110,11 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
 
     /**
      * Convert an integer to its respective generated {PACKAGE_NAME} ID based on the current config.
-     *
-     * @throws FutureProjectNameGeneratorException
      */
     public function create(int $id): string
     {
         if ($id < 0) {
-            throw new FutureProjectNameGeneratorException('ID must be a positive integer');
+            throw new InvalidArgumentException('ID must be a positive integer');
         }
 
         // Initialize value to id value
@@ -148,8 +145,6 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
 
     /**
      * Parses an {PACKAGE_NAME} ID value and returns the integer equivalent
-     *
-     * @throws FutureProjectNameGeneratorException
      */
     public function parse(string $text): int
     {
@@ -157,7 +152,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
         $value = strtolower(trim($text));
         // Ensure we have something to parse
         if (strlen($value) === 0) {
-            throw new FutureProjectNameGeneratorException('No text specified');
+            throw new InvalidArgumentException('No text specified');
         }
 
         // Initialize step
@@ -182,7 +177,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
                 $catIndex = max(--$catIndex, 0);
             }
         } catch (\Exception $ex) {
-            throw new FutureProjectNameGeneratorException(sprintf('Failed to lookup "%s"', $text));
+            throw new LookUpFailureException(sprintf('Failed to lookup "%s"', $text));
         }
         // Return calculated ID
         return $result;
@@ -217,8 +212,6 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
 
     /**
      * Returns the index of a word in the given category
-     *
-     * @throws FutureProjectNameGeneratorException
      */
     private function lookupWordIndex(string $category, string $word): int
     {
@@ -239,7 +232,7 @@ class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
             return $lastIx;
         }
 
-        throw new FutureProjectNameGeneratorException(sprintf('Failed to lookup "%s"', $word));
+        throw new LookUpFailureException(sprintf('Failed to lookup "%s"', $word));
     }
 
     /**

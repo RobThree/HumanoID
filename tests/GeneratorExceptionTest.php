@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace RobThree\UrlGenerator\Test;
 
-use PHPUnit\Framework\TestCase;
+use RobThree\UrlGenerator\Exceptions\InvalidArgumentException;
+use RobThree\UrlGenerator\Exceptions\LookUpFailureException;
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
-use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
 use TypeError;
 
 /**
@@ -18,21 +18,21 @@ class GeneratorExceptionTest extends BaseTestCase
 {
     public function testWillThrowExceptionWithEmptyWordSetsArray(): void
     {
-        $this->expectException(FutureProjectNameGeneratorException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No words specified');
         new FutureProjectNameGenerator([]);
     }
 
     public function testWillThrowExceptionWithEmptyCategoryArray(): void
     {
-        $this->expectException(FutureProjectNameGeneratorException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Categories must be either: unset (enables autodetect), or an array with size > 0, or unset');
         new FutureProjectNameGenerator($this->defaultWordSets, []);
     }
 
     public function testWillThrowExceptionOnImproperCategoryConstruction(): void
     {
-        $this->expectException(FutureProjectNameGeneratorException::class);
+        $this->expectException(LookUpFailureException::class);
         $this->expectExceptionMessage('Category "planets" not found in datafile, category is not an array or category is an empty array');
         new FutureProjectNameGenerator($this->defaultWordSets, ['planets', 'space-craft', 'country']);
     }
@@ -48,13 +48,13 @@ class GeneratorExceptionTest extends BaseTestCase
     {
         $categories = array_keys($this->defaultWordSets);
         $categories[] = '';
-        $this->expectException(FutureProjectNameGeneratorException::class);
+        $this->expectException(LookUpFailureException::class);
         $this->expectExceptionMessage('Category "" is invalid');
         new FutureProjectNameGenerator($this->defaultWordSets, $categories);
 
         $categories = array_keys($this->defaultWordSets);
         $categories[] = 42;
-        $this->expectException(FutureProjectNameGeneratorException::class);
+        $this->expectException(LookUpFailureException::class);
         $this->expectExceptionMessage('Category "42" is invalid');
         new FutureProjectNameGenerator($this->defaultWordSets, $categories);
     }
@@ -62,7 +62,7 @@ class GeneratorExceptionTest extends BaseTestCase
     public function testWillThrowExceptionWithNonPositiveInt(): void
     {
         $generator = new FutureProjectNameGenerator($this->defaultWordSets);
-        $this->expectException(FutureProjectNameGeneratorException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('ID must be a positive integer');
         $generator->create(-43);
     }
