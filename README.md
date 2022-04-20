@@ -50,8 +50,8 @@ The `HumanoID` has two public methods:
 You can use custom word lists; you can store these anywhere you want like in a JSON file or in a database. As long as you initialize the `HumanoID` class with the following data structure:
 
     [
-        'adjectives' => ['big", 'smart', 'funky'],
-        'colors'     => ['red", 'green', 'blue'],
+        'adjectives' => ['big', 'smart', 'funky'],
+        'colors'     => ['red', 'green', 'blue'],
         'animals'    => ['cow", 'whale', 'monkey'],
     ]
 
