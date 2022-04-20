@@ -19,6 +19,7 @@
     "Crater",
     "DarkMatter",
     "Density",
+    "Discovery",
     "Docking",
     "Doppler",
     "Dust",
@@ -29,11 +30,15 @@
     "Exoplanet",
     "Flare",
     "Galaxy",
+    "Geospace",
     "Geostationary",
     "Gravity",
     "HeavenlyBody",
     "Hubble",
     "Inertia",
+    "Intergalactic",
+    "Interplanetary",
+    "Interstellar",
     "Ionosphere",
     "Lens",
     "Lodestar",
@@ -85,8 +90,6 @@
   "star-taxonomy": [
     "Brightgiant",
     "Browndwarf",
-    "Dwarf",
-    "Giant",
     "Hypergiant",
     "Reddwarf",
     "Subdwarf",
@@ -94,33 +97,24 @@
     "Supergiant",
     "Whitedwarf"
   ],
-  "space-types": [
-    "Discovery",
-    "Geospace",
-    "Intergalactic",
-    "Interplanetary",
-    "Interstellar"
-  ],
-  "dwarf-planets": [
+  "planetoids": [
     "Ceres",
+    "Earth",
     "Eris",
     "Gonggong",
     "Haumea",
+    "Jupiter",
     "Makemake",
+    "Mars",
+    "Mercury",
+    "Neptune",
     "Orcus",
     "Pluto",
     "Quaoar",
-    "Sedna"
-  ],
-  "planets": [
-    "Mercury",
-    "Venus",
-    "Earth",
-    "Mars",
-    "Jupiter",
     "Saturn",
+    "Sedna",
     "Uranus",
-    "Neptune"
+    "Venus"
   ],
   "galaxies": [
     "Andromeda",
