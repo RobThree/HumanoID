@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator;
+namespace RobThree\HumanoID;
 
-interface FutureProjectNameGeneratorInterface
+interface HumanoIDInterface
 {
     public function create(int $id): string;
     public function parse(string $text): int;

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator\Test;
+namespace RobThree\HumanoID\Test;
 
-use RobThree\UrlGenerator\FutureProjectNameGenerator;
-use RobThree\UrlGenerator\WordFormatOption;
+use RobThree\HumanoID\HumanoID;
+use RobThree\HumanoID\WordFormatOption;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**
  * This set of tests will cover only the most basic kinds of generation tests.
  *
- * @see FutureProjectNameGenerator
+ * @see HumanoID
  */
 class BasicGeneratorTest extends BaseTestCase
 {
@@ -24,7 +24,7 @@ class BasicGeneratorTest extends BaseTestCase
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats($wordFormat = null): void
     {
-        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
+        $generator = new HumanoID($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->create($i);
@@ -40,7 +40,7 @@ class BasicGeneratorTest extends BaseTestCase
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithoutHyphens($wordFormat = null): void
     {
-        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '', $wordFormat);
+        $generator = new HumanoID($this->defaultWordSets, null, '', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->create($i);
@@ -56,7 +56,7 @@ class BasicGeneratorTest extends BaseTestCase
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormatsWithNullSeperator($wordFormat = null): void
     {
-        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, null, $wordFormat);
+        $generator = new HumanoID($this->defaultWordSets, null, null, $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->create($i);
@@ -72,7 +72,7 @@ class BasicGeneratorTest extends BaseTestCase
      */
     public function testCanGenerateDozenRandomLargeIdsAsVariousFormats($wordFormat = null): void
     {
-        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
+        $generator = new HumanoID($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 12; $i++) {
             $firstTwoDozenIds[] = $generator->create($i + 1024);
@@ -88,7 +88,7 @@ class BasicGeneratorTest extends BaseTestCase
      */
     public function testCanGenerateTwoDozenRandomVerLargeIdsAsVariousFormats($wordFormat = null): void
     {
-        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', $wordFormat);
+        $generator = new HumanoID($this->defaultWordSets, null, '-', $wordFormat);
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->create($i + 4096);

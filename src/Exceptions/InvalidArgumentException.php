@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator\Exceptions;
+namespace RobThree\HumanoID\Exceptions;
 
 use InvalidArgumentException as BaseInvalidArgumentException;
 

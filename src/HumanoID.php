@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator;
+namespace RobThree\HumanoID;
 
-use RobThree\UrlGenerator\Exceptions\InvalidArgumentException;
-use RobThree\UrlGenerator\Exceptions\LookUpFailureException;
+use RobThree\HumanoID\Exceptions\InvalidArgumentException;
+use RobThree\HumanoID\Exceptions\LookUpFailureException;
 
-class FutureProjectNameGenerator implements FutureProjectNameGeneratorInterface
+class HumanoID implements HumanoIDInterface
 {
     /**
      * Key for lookup array to store a lookup result (index).
-     * Also can, technically, be anything except any of the (lowercase) chars allowed in the urls.
+     * Also can, technically, be anything except any of the (lowercase) chars allowed in the HumanoIDs.
      */
     private const INDEX_PLACEHOLDER = 0;
 

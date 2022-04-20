@@ -1,6 +1,6 @@
 <?php
 
-namespace RobThree\UrlGenerator\Test;
+namespace RobThree\HumanoID\Test;
 
 abstract class BaseTestCase extends \PHPUnit\Framework\TestCase
 {

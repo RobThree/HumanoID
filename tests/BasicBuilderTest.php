@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator\Test;
+namespace RobThree\HumanoID\Test;
 
-use RobThree\UrlGenerator\FutureProjectName;
-use RobThree\UrlGenerator\FutureProjectNameGenerator;
+use RobThree\HumanoID\HumanoID;
+use RobThree\HumanoID\HumanoIDs;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**
  * This set of tests will cover only the most basic kinds of generation tests.
  *
- * @see FutureProjectNameGenerator
+ * @see HumanoID
  */
 class BasicBuilderTest extends BaseTestCase
 {
@@ -19,14 +19,14 @@ class BasicBuilderTest extends BaseTestCase
 
     public function testCanGetGeneratorFromBuilder(): void
     {
-        $generator = FutureProjectName::zooIdGenerator();
+        $generator = HumanoIDs::zooIdGenerator();
         $this->assertIsObject($generator);
-        $this->assertInstanceOf(FutureProjectNameGenerator::class, $generator);
+        $this->assertInstanceOf(HumanoID::class, $generator);
     }
 
     public function testDefaultGeneratorCanGenerateFirstTwoDozen(): void
     {
-        $generator = FutureProjectName::zooIdGenerator();
+        $generator = HumanoIDs::zooIdGenerator();
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 24; $i++) {
             $firstTwoDozenIds[] = $generator->create($i);
@@ -37,7 +37,7 @@ class BasicBuilderTest extends BaseTestCase
 
     public function testDefaultGeneratorCanGenerateDozenLargeIds(): void
     {
-        $generator = FutureProjectName::zooIdGenerator();
+        $generator = HumanoIDs::zooIdGenerator();
         $firstTwoDozenIds = [];
         for ($i = 0; $i <= 12; $i++) {
             $firstTwoDozenIds[] = $generator->create($i + 1024);

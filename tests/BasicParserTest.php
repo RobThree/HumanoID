@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator\Test;
+namespace RobThree\HumanoID\Test;
 
-use RobThree\UrlGenerator\FutureProjectNameGenerator;
-use RobThree\UrlGenerator\WordFormatOption;
+use RobThree\HumanoID\HumanoID;
+use RobThree\HumanoID\WordFormatOption;
 
 /**
  * This set of tests will cover only the most basic kinds of parsing tests.
  *
- * @see FutureProjectNameGenerator
+ * @see HumanoID
  */
 class BasicParserTest extends BaseTestCase
 {
     public function testCanParseIdIntoInt(): void
     {
-        $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', WordFormatOption::ucfirst());
+        $generator = new HumanoID($this->defaultWordSets, null, '-', WordFormatOption::ucfirst());
         $firstTwoDozenIds = [
             "Dog",
             "Cat",

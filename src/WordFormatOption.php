@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RobThree\UrlGenerator;
+namespace RobThree\HumanoID;
 
 use Spatie\Enum\Enum;
 
