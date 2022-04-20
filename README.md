@@ -1,5 +1,7 @@
 # ![Logo](logo.png) HumanoID
 
+[![Packagist](https://img.shields.io/packagist/v/robthree/humanoid.svg)](https://packagist.org/packages/robthree/humanoid) [![Packagist](https://img.shields.io/packagist/dt/robthree/humanoid.svg)](https://packagist.org/packages/robthree/humanoid)
+
 This class can be used to generate "friendly id's" where numerical ID's are replaced with words. A well known example is [Gfycat]([https://gfycat.com/about](https://gfycat.com/about)) which uses "`adjectiveadjectiveanimal`": [`https://gfycat.com/gracefulspanishgemsbuck`](https://gfycat.com/gracefulspanishgemsbuck).
 
 This class has two methods: `create(int $id)` which returns a string generated from the id and `parse(string $text)` which returns the id from the parsed text. It supports custom  word / category lists, an optional separator and optional formatting.
