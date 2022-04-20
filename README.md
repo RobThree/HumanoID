@@ -50,18 +50,18 @@ The `HumanoID` has two public methods:
 You can use custom word lists; you can store these anywhere you want like in a JSON file or in a database. As long as you initialize the `HumanoID` class with the following data structure:
 
     [
-        "adjectives" => ["big", "smart", "funky"],
-        "colors"     => ["red", "green", "blue"],
-        "animals"    => ["cow","whale","monkey"]
+        'adjectives' => ['big", 'smart', 'funky'],
+        'colors'     => ['red", 'green', 'blue'],
+        'animals'    => ['cow", 'whale', 'monkey'],
     ]
 
-The `HumanoID` will automatically determine which 'categories' are available. In the above example generated HumanoIDs would take the form `adjective-color-animal`. Whenever this should turn out to be not enough, the `HumanoID` automatically repeats the first category as often as needed; so this would result in `adjective-adjective-color-animal` or even `adjective-adjective-adjective-color-animal` and so on. However, the order of the categories can be specified by passing an array of words to the `$categories` argument of the `HumanoID` class. You could, for example, pass `['colors','adjectives','animals']` which will result in HumanoIDs that take the form `color-adjective-animal` or, again, when this should not be enough: `color-color-color-adjective-animal`.
+The `HumanoID` will automatically determine which 'categories' are available. In the above example generated HumanoIDs would take the form `adjective-color-animal`. Whenever this should turn out to be not enough, the `HumanoID` automatically repeats the first category as often as needed; so this would result in `adjective-adjective-color-animal` or even `adjective-adjective-adjective-color-animal` and so on. However, the order of the categories can be specified by passing an array of words to the `$categories` argument of the `HumanoID` class. You could, for example, pass `['colors', 'adjectives', 'animals']` which will result in HumanoIDs that take the form `color-adjective-animal` or, again, when this should not be enough: `color-color-color-adjective-animal`.
 
 Ofcourse you don't have to use adjectives, colors and animals. It can be anything you want. So, more generalized, you can provide any data structure in the form
 
     [
-        "cateogory1" =>  ["value", "value", "value", ...],
-        "cateogory2" =>  ["value", "value", "value", ...],
+        'cateogory1' =>  ['value', 'value', 'value', ...],
+        'cateogory2' =>  ['value', 'value', "value', ...],
         ...
     ]
     
