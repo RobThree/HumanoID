@@ -334,3 +334,6 @@ ASALocalRun/
 
 #Vendor files
 vendor/
+
+# PHP automated test files
+build
