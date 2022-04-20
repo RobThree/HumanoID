@@ -1,7 +1,7 @@
 {
-    "name": "robthree/urlgenerator",
+    "name": "robthree/humanoid",
     "type": "library",
-    "description": "Friendly URL generator. Converts integers to words and back",
+    "description": "Friendly ID generator. Converts integers to words and back",
     "license": "MIT",
     "authors": [
         {
@@ -12,6 +12,11 @@
         {
             "name": "MallardDuck (Dan Pock)",
             "homepage": "https://github.com/mallardduck",
+            "role": "Maintainer"
+        },
+        {
+            "name": "MueR",
+            "homepage": "https://github.com/muer",
             "role": "Maintainer"
         }
     ],
@@ -36,12 +41,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RobThree\\UrlGenerator\\": "src/"
+            "RobThree\\HumanoID\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RobThree\\UrlGenerator\\Test\\": "tests"
+            "RobThree\\HumanoID\\Test\\": "tests"
         }
     },
     "minimum-stability": "stable",
