@@ -118,7 +118,7 @@ The 'ambiguous words' problem _can_ probably be solved in a later version by cha
 
 ## Pronunciation
 
-Humanoid is pronounced "humano i d" (`/ˈhjuːmənəʊ aɪ diː/`), but "humanoid" (`/ˈhjuːmənɔɪd/`) is fine too if you like to please the robots.
+Humanoid is pronounced "humano i d" (`/ˈhjuːmənəʊ aɪ diː/`), but "humanoid" (`/ˈhjuːmənɔɪd/`) is fine too if you like to please the robots 🤖
 
 ## License
 
