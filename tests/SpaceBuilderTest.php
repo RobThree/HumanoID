@@ -45,4 +45,15 @@ class SpaceBuilderTest extends BaseTestCase
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
     }
+
+    public function testDefaultGeneratorCanGenerateDozenVeryLargeIds(): void
+    {
+        $generator = FutureProjectName::spaceIdGenerator();
+        $firstTwoDozenIds = [];
+        for ($i = 0; $i <= 12; $i++) {
+            $firstTwoDozenIds[] = $generator->create($i + 4194304);
+        }
+
+        $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
+    }
 }
