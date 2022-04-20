@@ -6,8 +6,6 @@ namespace RobThree\UrlGenerator\Test;
 
 use RobThree\UrlGenerator\FutureProjectName;
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
-use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
-use RobThree\UrlGenerator\WordFormatOption;
 use Spatie\Snapshots\MatchesSnapshots;
 
 /**
@@ -26,9 +24,6 @@ class SpaceBuilderTest extends BaseTestCase
         $this->assertInstanceOf(FutureProjectNameGenerator::class, $generator);
     }
 
-    /**
-     * @throws FutureProjectNameGeneratorException
-     */
     public function testDefaultGeneratorCanGenerateFirstTwoDozen(): void
     {
         $generator = FutureProjectName::spaceIdGenerator();
@@ -40,9 +35,6 @@ class SpaceBuilderTest extends BaseTestCase
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
     }
 
-    /**
-     * @throws FutureProjectNameGeneratorException
-     */
     public function testDefaultGeneratorCanGenerateDozenLargeIds(): void
     {
         $generator = FutureProjectName::spaceIdGenerator();

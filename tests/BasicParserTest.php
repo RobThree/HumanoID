@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RobThree\UrlGenerator\Test;
 
 use RobThree\UrlGenerator\FutureProjectNameGenerator;
-use RobThree\UrlGenerator\FutureProjectNameGeneratorException;
 use RobThree\UrlGenerator\WordFormatOption;
 
 /**
@@ -15,9 +14,6 @@ use RobThree\UrlGenerator\WordFormatOption;
  */
 class BasicParserTest extends BaseTestCase
 {
-    /**
-     * @throws FutureProjectNameGeneratorException
-     */
     public function testCanParseIdIntoInt(): void
     {
         $generator = new FutureProjectNameGenerator($this->defaultWordSets, null, '-', WordFormatOption::ucfirst());
