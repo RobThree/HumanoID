@@ -12,11 +12,11 @@ Usage:
 
 ```php
 // Create new instance of HumanoID via the builder
-$zooIdGen = new \RobThree\HumanoID\HumanoIDs::zooIdGenerator();
+$zooIdGen = HumanoIDs::zooIdGenerator();
 
 // Convert ID to HumanoID
 $zooId = $zooIdGen->create(96712);
-echo sprintf("HumanoId   : '%s'\n", $zooId);
+echo sprintf("HumanoID   : %s\n", $zooId);
     
 // Convert back to ID
 $id = $zooIdGen->parse($zooId);
@@ -26,7 +26,7 @@ echo sprintf("Decoded ID : %d\n", $id);
 Output (depending on the wordlist used):
 
 ```
-HumanoId   : 'sick-viridian-wolf'
+HumanoId   : 'sick-yellow-wolf'
 Decoded ID : 96712
 ```
 
@@ -115,6 +115,10 @@ We won't go into too much detail, but in essence a tree is created on a per-char
 
 ### Notes
 The 'ambiguous words' problem _can_ probably be solved in a later version by changing the iteratively lookup process into a recusive algorithm; that way when a lookup turns out to fail (again, `cold`, `old` for example) the next value can be tried recursively until the HumanoID is completely decoded correctly (or still fail as a whole).
+
+## Pronunciation
+
+It's pronounced humano (`/ˈhjuːmənəʊ aɪ diː/`) I Dee, but humanoid (`/ˈhjuːmənɔɪd/`) is fine too.
 
 ## License
 
