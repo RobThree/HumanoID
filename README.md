@@ -100,9 +100,9 @@ The `parse(string $text): int` method does, basically the opposite of the `creat
 
 **However**; We wanted to stay as close as possible to the Gfycat implementation. And that complicates things. This, basically, meant we had the following requirements: the url should be case insensitive *and* contain an *optional* separator.
 
-The 'decoding' of a HumanoIDs relies on a lookup table which is created when the `HumanoID` class is initialized (which, by the way, is a pretty expensive operation; keep the instance around as long as you can if you need to generate or parse more than one HumanoID!).
+The 'decoding' of HumanoIDs relies on a lookup table which is created when the `HumanoID` class is initialized (which, by the way, is a pretty expensive operation; keep the instance around as long as you can if you need to generate or parse more than one HumanoID!).
 
-We won't go into too much detail, but in essence a tree is created on a per-character-basis in reverse order. When decoding a HumanoIDs the algorithm starts at the end working it's way to the beginning of the string while meanwhile working it's way down this tree and looking up word indices in their respective categories. Whenever an index is determined it can be used in the 'base-N' conversion and the algorithm continues until the beginning of the HumanoIDs is reached or a lookup failed.
+We won't go into too much detail, but in essence a tree is created on a per-character-basis in reverse order. When decoding HumanoIDs the algorithm starts at the end working it's way to the beginning of the string while meanwhile working it's way down this tree and looking up word indices in their respective categories. Whenever an index is determined it can be used in the 'base-N' conversion and the algorithm continues until the beginning of the HumanoIDs is reached or a lookup failed.
 
 ## General advice
 
