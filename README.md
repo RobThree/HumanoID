@@ -1,4 +1,4 @@
-# HumanoID
+# ![Logo][logo.png] HumanoID
 
 This class can be used to generate "friendly id's" where numerical ID's are replaced with words. A well known example is [Gfycat]([https://gfycat.com/about](https://gfycat.com/about)) which uses "`adjectiveadjectiveanimal`": [`https://gfycat.com/gracefulspanishgemsbuck`](https://gfycat.com/gracefulspanishgemsbuck).
 
