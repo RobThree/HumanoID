@@ -109,7 +109,7 @@ class HumanoID implements HumanoIDInterface
     }
 
     /**
-     * Convert an integer to its respective generated {PACKAGE_NAME} ID based on the current config.
+     * Convert an integer to its respective generated HumanoID based on the current config.
      */
     public function create(int $id): string
     {
@@ -144,7 +144,7 @@ class HumanoID implements HumanoIDInterface
     }
 
     /**
-     * Parses an {PACKAGE_NAME} ID value and returns the integer equivalent
+     * Parses a HumanoID value and returns the integer equivalent
      */
     public function parse(string $text): int
     {
