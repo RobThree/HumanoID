@@ -8,9 +8,17 @@ This class has two methods: `create(int $id)` which returns a string generated f
 
 ## Quickstart
 
+Installation:
+
+```cmd
+composer require robthree/humanoid
+```
+
 Usage:
 
 ```php
+use RobThree\HumanoID\HumanoIDs;
+
 // Create new instance of HumanoID via the builder
 $zooIdGen = HumanoIDs::zooIdGenerator();
 
@@ -29,6 +37,8 @@ Output (depending on the wordlist used):
 HumanoId   : 'sick-yellow-wolf'
 Decoded ID : 96712
 ```
+
+We provide a `zooIdGenerator` and a `spaceIdGenerator` out-of-the box but it's easy (and recommended) to create  your own `HumanoID` by implementing the `HumanoIDInterface`.
 
 ## API
 
