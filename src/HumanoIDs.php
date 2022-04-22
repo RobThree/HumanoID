@@ -6,8 +6,8 @@ namespace RobThree\HumanoID;
 
 final class HumanoIDs
 {
-    private static HumanoID $zooGenerator;
-    private static HumanoID $spaceGenerator;
+    private static HumanoID $zooGenerator = null;
+    private static HumanoID $spaceGenerator = null;
 
     public static function zooIdGenerator(
         ?string $separator = '-',
