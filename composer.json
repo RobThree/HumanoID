@@ -63,8 +63,5 @@
             "@unit"
         ],
         "unit": "./vendor/bin/phpunit"
-    },
-    "archive": {
-        "exclude": ["/design"]
     }
 }
