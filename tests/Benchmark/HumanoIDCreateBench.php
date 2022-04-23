@@ -1,19 +1,20 @@
 <?php
 
-namespace RobThree\HumanoID\Tests\Benchmark;
+namespace RobThree\HumanoID\Test\Benchmark;
 
 use RobThree\HumanoID\HumanoID;
 use RobThree\HumanoID\HumanoIDs;
-use RobThree\HumanoID\HumanoIDInterface;
 
-require_once __DIR__ . '../../../vendor/autoload.php';
-
-/**
- * @BeforeMethods("setUp")
- */
-class HumanoIDCreateBench {
-    public function setUp(array $params): void
+class HumanoIDCreateBench extends BaseCreateBench {
+    public function __construct()
     {
+        $this->zooGenerator = HumanoIDs::zooIdGenerator();
+        $this->spaceGenerator = HumanoIDs::spaceIdGenerator();
+        $this->customGenerator = new HumanoID([
+            'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'pink', 'purple', 'white', 'black'],
+            'adjectives' => ['big', 'funny', 'lazy', 'old', 'happy', 'sad', 'small', 'quick', 'clever', 'itchy', 'tame'],
+            'animals' => ['dog', 'cat', 'hamster', 'goldfish', 'chicken', 'snake', 'rat', 'owl', 'shark', 'panda', 'camel']
+        ]);
     }
 
     /**
@@ -22,36 +23,36 @@ class HumanoIDCreateBench {
      * @OutputTimeUnit("seconds")
      * @OutputMode("throughput")
      * @ParamProviders({
-     *     "provideGenerators",
-     *     "provideIdRange"
+     *     "provideId"
      * })
      */
-    public function benchCreate(array $params) {
-        $params['generator']->create(rand(0, $params['maxid']));
+    public function benchZooGenerator(array $params) {
+        $this->zooGenerator->create($params['id']);
     }
 
-    public function provideGenerators()
-    {
-        $generators = [
-            HumanoIDs::zooIdGenerator(),
-            HumanoIDs::spaceIdGenerator(),
-            new HumanoID([
-                'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'pink', 'purple', 'white', 'black'],
-                'adjectives' => ['big', 'funny', 'lazy', 'old', 'happy', 'sad', 'small', 'quick', 'clever', 'itchy', 'tame'],
-                'animals' => ['dog', 'cat', 'hamster', 'goldfish', 'chicken', 'snake', 'rat', 'owl', 'shark', 'panda', 'camel']
-            ])
-        ];
-
-        foreach ($generators as $gen) {
-            yield ['generator' => $gen];
-        }
+    /**
+     * @Revs(10000)
+     * @Iterations(5)
+     * @OutputTimeUnit("seconds")
+     * @OutputMode("throughput")
+     * @ParamProviders({
+     *     "provideId"
+     * })
+     */
+    public function benchSpaceGenerator(array $params) {
+        $this->spaceGenerator->create($params['id']);
     }
 
-    public function provideIdRange()
-    {
-        $ranges = [0, 10, 1000, 1000000];
-        foreach ($ranges as $r) {
-            yield ['maxid' => $r];
-        }
+    /**
+     * @Revs(10000)
+     * @Iterations(5)
+     * @OutputTimeUnit("seconds")
+     * @OutputMode("throughput")
+     * @ParamProviders({
+     *     "provideId"
+     * })
+     */
+    public function benchCustomSmallerWordSetGenerator(array $params) {
+        $this->customGenerator->create($params['id']);
     }
 }
