@@ -1,0 +1,69 @@
+<?php
+
+declare(strict_types=1);
+
+namespace RobThree\HumanoID\Test\Benchmark;
+
+use RobThree\HumanoID\HumanoID;
+
+/**
+ * @BeforeMethods("setUp")
+ * @AfterMethods("tearDown")
+ */
+class CustomSmallerGeneratorBench extends BenchmarkBase {
+
+    public function setUp()
+    {
+        $this->generator = new HumanoID([
+            'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'pink', 'purple', 'white', 'black'],
+            'adjectives' => ['big', 'funny', 'lazy', 'old', 'happy', 'sad', 'small', 'quick', 'clever', 'itchy', 'tame'],
+            'animals' => ['dog', 'cat', 'hamster', 'goldfish', 'chicken', 'snake', 'rat', 'owl', 'shark', 'panda', 'camel']
+        ]);
+    }
+
+    public function tearDown(): void
+    {
+        $this->generator = null;
+    }
+
+    /**
+     * @Revs(10000)
+     * @Iterations(5)
+     * @OutputTimeUnit("seconds")
+     * @OutputMode("throughput")
+     * @ParamProviders({
+     *     "provideId"
+     * })
+     */
+    public function benchCreate(array $params) {
+        $this->generator->create($params['id']);
+    }
+
+    /**
+     * @Revs(10000)
+     * @Iterations(5)
+     * @OutputTimeUnit("seconds")
+     * @OutputMode("throughput")
+     * @ParamProviders({
+     *     "provideRandId"
+     * })
+     */
+    public function benchCreateRand(array $params) {
+        $this->generator->create($params['id']);
+    }
+
+    /**
+     * @Revs(10000)
+     * @Iterations(5)
+     * @OutputTimeUnit("seconds")
+     * @OutputMode("throughput")
+     * @ParamProviders({
+     *     "provideId"
+     * })
+     */
+    public function benchCreateAndDecode(array $params) {
+        $customId = $this->generator->create($params['id']);
+        $decoded = $this->generator->parse($customId);
+        assert($params['id'] === $decoded);
+    }
+}
