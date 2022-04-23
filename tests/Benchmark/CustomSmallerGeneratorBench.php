@@ -1,33 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RobThree\HumanoID\Test\Benchmark;
 
 use RobThree\HumanoID\HumanoID;
 use RobThree\HumanoID\HumanoIDs;
 
-class HumanoIDCreateBench extends BaseCreateBench {
-    public function __construct()
+/**
+ * @BeforeMethods("setUp")
+ * @AfterMethods("tearDown")
+ */
+class CustomSmallerGeneratorBench extends BenchmarkBase {
+
+    public function setUp()
     {
-        $this->zooGenerator = HumanoIDs::zooIdGenerator();
-        $this->spaceGenerator = HumanoIDs::spaceIdGenerator();
-        $this->customGenerator = new HumanoID([
+        $this->generator = new HumanoID([
             'colors' => ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'pink', 'purple', 'white', 'black'],
             'adjectives' => ['big', 'funny', 'lazy', 'old', 'happy', 'sad', 'small', 'quick', 'clever', 'itchy', 'tame'],
             'animals' => ['dog', 'cat', 'hamster', 'goldfish', 'chicken', 'snake', 'rat', 'owl', 'shark', 'panda', 'camel']
         ]);
     }
 
-    /**
-     * @Revs(10000)
-     * @Iterations(5)
-     * @OutputTimeUnit("seconds")
-     * @OutputMode("throughput")
-     * @ParamProviders({
-     *     "provideId"
-     * })
-     */
-    public function benchZooGenerator(array $params) {
-        $this->zooGenerator->create($params['id']);
+    public function tearDown(): void
+    {
+        $this->generator = null;
     }
 
     /**
@@ -39,8 +36,21 @@ class HumanoIDCreateBench extends BaseCreateBench {
      *     "provideId"
      * })
      */
-    public function benchSpaceGenerator(array $params) {
-        $this->spaceGenerator->create($params['id']);
+    public function benchCreate(array $params) {
+        $this->generator->create($params['id']);
+    }
+
+    /**
+     * @Revs(10000)
+     * @Iterations(5)
+     * @OutputTimeUnit("seconds")
+     * @OutputMode("throughput")
+     * @ParamProviders({
+     *     "provideRandId"
+     * })
+     */
+    public function benchCreateRand(array $params) {
+        $this->generator->create($params['id']);
     }
 
     /**
@@ -52,7 +62,9 @@ class HumanoIDCreateBench extends BaseCreateBench {
      *     "provideId"
      * })
      */
-    public function benchCustomSmallerWordSetGenerator(array $params) {
-        $this->customGenerator->create($params['id']);
+    public function benchCreateAndDecode(array $params) {
+        $customId = $this->generator->create($params['id']);
+        $decoded = $this->generator->parse($customId);
+        assert($params['id'] === $decoded);
     }
 }
