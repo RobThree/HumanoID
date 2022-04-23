@@ -8,21 +8,21 @@
     "packages": [
         {
             "name": "spatie/enum",
-            "version": "3.12.0",
+            "version": "3.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/enum.git",
-                "reference": "c0180f1de7c5d06e4b84efbc751ea19167140173"
+                "reference": "f1a0f464ba909491a53e60a955ce84ad7cd93a2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/enum/zipball/c0180f1de7c5d06e4b84efbc751ea19167140173",
-                "reference": "c0180f1de7c5d06e4b84efbc751ea19167140173",
+                "url": "https://api.github.com/repos/spatie/enum/zipball/f1a0f464ba909491a53e60a955ce84ad7cd93a2c",
+                "reference": "f1a0f464ba909491a53e60a955ce84ad7cd93a2c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.4 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "fakerphp/faker": "^1.9.1",
@@ -80,7 +80,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-05T09:44:52+00:00"
+            "time": "2022-04-22T08:51:55+00:00"
         }
     ],
     "packages-dev": [
@@ -1076,16 +1076,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.26.7",
+            "version": "0.26.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "658c4567b78fc786ec63863715d711edcc67ccd7"
+                "reference": "27727f929420a405e74530115aa98f17a6083717"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/658c4567b78fc786ec63863715d711edcc67ccd7",
-                "reference": "658c4567b78fc786ec63863715d711edcc67ccd7",
+                "url": "https://api.github.com/repos/infection/infection/zipball/27727f929420a405e74530115aa98f17a6083717",
+                "reference": "27727f929420a405e74530115aa98f17a6083717",
                 "shasum": ""
             },
             "require": {
@@ -1186,7 +1186,7 @@
             ],
             "support": {
                 "issues": "https://github.com/infection/infection/issues",
-                "source": "https://github.com/infection/infection/tree/0.26.7"
+                "source": "https://github.com/infection/infection/tree/0.26.8"
             },
             "funding": [
                 {
@@ -1198,7 +1198,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-04-20T19:25:53+00:00"
+            "time": "2022-04-21T10:28:00+00:00"
         },
         {
             "name": "justinrainbow/json-schema",

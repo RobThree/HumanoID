@@ -1,4 +1,9 @@
 {
     "$schema":"./vendor/phpbench/phpbench/phpbench.schema.json",
-    "runner.bootstrap": "vendor/autoload.php"
+    "runner.bootstrap": "vendor/autoload.php",
+    "runner.php_config": 
+    {
+        "opcache.enable": 1,
+        "opcache.enable_cli": 1
+    }
 }
