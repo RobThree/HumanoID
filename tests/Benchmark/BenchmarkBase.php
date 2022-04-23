@@ -7,7 +7,7 @@ namespace RobThree\HumanoID\Test\Benchmark;
 use RobThree\HumanoID\HumanoID;
 use RobThree\HumanoID\HumanoIDs;
 
-abstract class BaseCreateBench {
+abstract class BenchmarkBase {
 
     private HumanoID $generator;
 
