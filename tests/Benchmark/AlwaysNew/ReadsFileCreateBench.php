@@ -10,7 +10,7 @@ use RobThree\HumanoID\Test\Benchmark\BenchmarkBase;
 class ReadsFileCreateBench extends BenchmarkBase {
 
     /**
-     * @Revs(10000)
+     * @Revs(1000)
      * @Iterations(5)
      * @OutputTimeUnit("seconds")
      * @OutputMode("throughput")

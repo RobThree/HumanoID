@@ -20,7 +20,7 @@ class CachesFileCreateBench extends BenchmarkBase {
     }
 
     /**
-     * @Revs(10000)
+     * @Revs(1000)
      * @Iterations(5)
      * @OutputTimeUnit("seconds")
      * @OutputMode("throughput")
