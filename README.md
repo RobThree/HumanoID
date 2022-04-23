@@ -126,6 +126,10 @@ We won't go into too much detail, but in essence a tree is created on a per-char
 ### Notes
 The 'ambiguous words' problem _can_ probably be solved in a later version by changing the iteratively lookup process into a recusive algorithm; that way when a lookup turns out to fail (again, `cold`, `old` for example) the next value can be tried recursively until the HumanoID is completely decoded correctly (or still fail as a whole).
 
+## Benchmarks
+
+Some basic, preliminary benchmarks can be found [here](https://github.com/RobThree/HumanoID/issues/10#issuecomment-1107459503), more are in the works.
+
 ## Pronunciation
 
 HumanoID is pronounced "humano i d" (`/ˈhjuːmənəʊ aɪ diː/`), but "humanoid" (`/ˈhjuːmənɔɪd/`) is fine too if you like to please the robots 🤖
