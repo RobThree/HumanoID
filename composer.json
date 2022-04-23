@@ -32,7 +32,8 @@
         "phpunit/phpunit": "^9.5.20",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "squizlabs/php_codesniffer": "*",
-        "vimeo/psalm": "^4.22"
+        "vimeo/psalm": "^4.22",
+        "phpbench/phpbench": "^1.2"
     },
     "config": {
         "allow-plugins": {
