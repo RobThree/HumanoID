@@ -26,7 +26,7 @@ class CachesJsonCreateBench extends BenchmarkBase {
      *     "provideId"
      * })
      */
-    public function benchCreate(array $params) {
+    public function benchCreateWithNew(array $params) {
         $generator = new HumanoID($this->spaceJson);
         $generator->create($params['id']);
     }

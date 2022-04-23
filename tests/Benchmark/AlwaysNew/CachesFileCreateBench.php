@@ -28,7 +28,7 @@ class CachesFileCreateBench extends BenchmarkBase {
      *     "provideId"
      * })
      */
-    public function benchCreate(array $params) {
+    public function benchCreateWithNew(array $params) {
         $generator = new HumanoID(
             json_decode(
                 $this->spaceWordsContents,

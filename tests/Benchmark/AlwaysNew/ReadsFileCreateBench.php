@@ -18,7 +18,7 @@ class ReadsFileCreateBench extends BenchmarkBase {
      *     "provideId"
      * })
      */
-    public function benchCreate(array $params) {
+    public function benchCreateWithNew(array $params) {
         $generator = new HumanoID(
             json_decode(
                 file_get_contents(dirname(__DIR__, 3) . '/data/space-words.json'),
