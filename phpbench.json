@@ -11,7 +11,7 @@
       "humanoid": {
         "extends": "aggregate",
         "break": [
-          "subject_name"
+          "subject"
         ]
       }
     }
