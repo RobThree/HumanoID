@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RobThree\HumanoID\Test\Benchmark;
 
 use RobThree\HumanoID\HumanoID;
-use RobThree\HumanoID\HumanoIDs;
 
 /**
  * @BeforeMethods("setUp")

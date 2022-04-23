@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RobThree\HumanoID\Test\Benchmark;
 
 use RobThree\HumanoID\HumanoID;
-use RobThree\HumanoID\HumanoIDs;
 
 /**
  * @BeforeMethods("setUp")
@@ -16,7 +15,7 @@ class ZooBench extends BenchmarkBase {
     public function setUp()
     {
         $this->generator = new HumanoID(json_decode(
-            file_get_contents(HumanoIDs::baseWordsPath() . '/zoo-words.json'),
+            file_get_contents(dirname(__DIR__, 2) . '/data/zoo-words.json'),
             true
         ));
     }
