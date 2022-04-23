@@ -52,6 +52,8 @@
     },
     "minimum-stability": "stable",
     "scripts": {
+        "bench": "./vendor/bin/phpbench run",
+        "benchmark": "./vendor/bin/phpbench run tests/Benchmark",
         "phpstan": "./vendor/bin/phpstan",
         "psalm": "./vendor/bin/psalm",
         "style": "./vendor/bin/phpcs --colors --cache=build/cache/phpcs.cache --",
