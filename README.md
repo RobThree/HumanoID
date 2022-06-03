@@ -120,7 +120,7 @@ We won't go into too much detail, but in essence a tree is created on a per-char
 - Use large word-lists. *Don't go overboard*, but categories with a handful of words don't help much (*unless* you don't mind either long HumanoIDs.(`red-blue-blue-red-red-blue-funky-monkey` for example) or have some more smaller categories).
 - Whatever wordlist/separator/format you decide on, once you picked it, you're stuck with it (unless you want to break all your HumanoIDs or you'll need to do some (on-the-fly?) conversion.
 - When not using any separator, try to use longer, unique, words that are not contained in other words (so, for example, avoid "`old`, `cold`" or "`expensive`,`inexpensive`").
-- If ambiguous words without a separator are unavoidable or desired you could consider only using the `create(int $id)` method and storing the result alongside the `id` in your data. Apply a unique constraint and index if you can. That way you can use the field with the HumanoID value to do a lookup.
+- If ambiguous words without a separator are unavoidable or desired you could consider only using the `create(int $id)` method and storing the result alongside the `id` with your data. Apply a unique constraint and index if you can. That way you can use the field with the HumanoID value to do a lookup.
 - [As mentioned earlier](#humanoid-to-ID-integer-conversion); try to keep this class around for as long as possible. The constructor contains some fairly CPU intensive code (building the lookup table), so ideally you keep an instance alive for as long as possible.
 
 ### Notes
