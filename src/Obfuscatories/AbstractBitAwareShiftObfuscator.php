@@ -2,21 +2,18 @@
 
 namespace RobThree\HumanoID\Obfuscatories;
 
-abstract class AbstractBitAwareShiftObfuscator implements SymmetricObfuscatorInterface
+abstract class AbstractBitAwareShiftObfuscator extends BasicShiftObfuscator
 {
-
-    public static int $salt;
-
     public static bool $is32Bit = (PHP_INT_SIZE === 4);
 
     public function obfuscate(int $id): int
     {
-        return static::$is32Bit ? static::obfuscate32($id) : static::obfuscate64($id) ^ static::$salt;
+        return static::$is32Bit ? static::obfuscate32($id) : static::obfuscate64($id) ^ $this->salt;
     }
 
     public function unobfuscate(int $id): int
     {
-        $id ^= static::$salt;
+        $id ^= $this->salt;
         return static::$is32Bit ? static::unobfuscate32($id) : static::unobfuscate64($id);
     }
 
