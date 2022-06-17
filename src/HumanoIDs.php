@@ -41,8 +41,7 @@ final class HumanoIDs
                 ),
                 null,
                 $separator,
-                $format,
-                $obfuscator
+                $format
             );
         }
 
@@ -79,8 +78,7 @@ final class HumanoIDs
                 ),
                 null,
                 $separator,
-                $format,
-                $obfuscator
+                $format
             );
         }
 
