@@ -56,4 +56,11 @@ class SpaceBuilderTest extends BaseTestCase
 
         $this->assertMatchesJsonSnapshot($firstTwoDozenIds);
     }
+
+    public function testDefaultGeneratorWithNewArgsThrows(): void
+    {
+        $this->expectWarning();
+        $this->expectWarningMessage("Calling spaceIdGenerator with different arguments will result in a new instance of HumanoID being created each time. Instead consider constructing a new instance of HumanoID directly");
+        HumanoIDs::spaceIdGenerator('_');
+    }
 }
