@@ -2,7 +2,7 @@
 
 namespace RobThree\HumanoID\Obfuscatories;
 
-class NOPObfuscator implements SymetricObfuscatorInterface
+class NOPObfuscator implements SymmetricObfuscatorInterface
 {
 
     public function obfuscate(int $id): int

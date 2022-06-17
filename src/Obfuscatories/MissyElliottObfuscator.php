@@ -2,7 +2,7 @@
 
 namespace RobThree\HumanoID\Obfuscatories;
 
-class MissyElliottObfuscator implements SymetricObfuscatorInterface
+class MissyElliottObfuscator implements SymmetricObfuscatorInterface
 {
 
     public function obfuscate(int $id): int

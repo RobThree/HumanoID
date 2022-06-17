@@ -2,7 +2,7 @@
 
 namespace RobThree\HumanoID\Obfuscatories;
 
-abstract class AbstractShiftObfuscator implements SymetricObfuscatorInterface
+abstract class AbstractShiftObfuscator implements SymmetricObfuscatorInterface
 {
 
     public static int $salt;
