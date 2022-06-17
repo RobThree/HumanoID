@@ -7,7 +7,7 @@ namespace RobThree\HumanoID;
 use RobThree\HumanoID\Exceptions\InvalidArgumentException;
 use RobThree\HumanoID\Exceptions\LookUpFailureException;
 use RobThree\HumanoID\Obfuscatories\NOPObfuscator;
-use RobThree\HumanoID\Obfuscatories\SymetricObfuscatorInterface;
+use RobThree\HumanoID\Obfuscatories\SymmetricObfuscatorInterface;
 
 class HumanoID implements HumanoIDInterface
 {
@@ -45,7 +45,7 @@ class HumanoID implements HumanoIDInterface
 
     private ?WordFormatOption $format;
 
-    private SymetricObfuscatorInterface $obfuscator;
+    private SymmetricObfuscatorInterface $obfuscator;
 
     /**
      * @param array<string, array<array-key, string|mixed>|mixed> $wordSets
@@ -58,7 +58,7 @@ class HumanoID implements HumanoIDInterface
         ?array $categories = null,
         ?string $separator = '-',
         ?WordFormatOption $format = null,
-        ?SymetricObfuscatorInterface $obfuscator = null
+        ?SymmetricObfuscatorInterface $obfuscator = null
     ) {
         // Ensure we have a list of wordsets
         if (count($wordSets) === 0) {
