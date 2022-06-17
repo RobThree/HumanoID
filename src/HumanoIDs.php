@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RobThree\HumanoID;
 
-use RobThree\HumanoID\Obfuscatories\SymetricObfuscatorInterface;
+use RobThree\HumanoID\Obfuscatories\SymmetricObfuscatorInterface;
 
 final class HumanoIDs
 {
@@ -14,7 +14,7 @@ final class HumanoIDs
     public static function zooIdGenerator(
         ?string $separator = '-',
         ?WordFormatOption $format = null,
-        ?SymetricObfuscatorInterface $obfuscator = null
+        ?SymmetricObfuscatorInterface $obfuscator = null
     ): HumanoID {
         if (self::$zooGenerator === null) {
             self::$zooGenerator = new HumanoID(
@@ -34,7 +34,7 @@ final class HumanoIDs
     public static function spaceIdGenerator(
         ?string $separator = '-',
         ?WordFormatOption $format = null,
-        ?SymetricObfuscatorInterface $obfuscator = null
+        ?SymmetricObfuscatorInterface $obfuscator = null
     ): HumanoID {
         if (self::$spaceGenerator === null) {
             self::$spaceGenerator = new HumanoID(
