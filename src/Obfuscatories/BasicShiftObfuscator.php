@@ -22,3 +22,4 @@ class BasicShiftObfuscator implements SymmetricObfuscatorInterface
         return $id ^ $this->salt;
     }
 }
+
