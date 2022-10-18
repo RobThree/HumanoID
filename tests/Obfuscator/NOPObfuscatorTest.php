@@ -16,6 +16,6 @@ class NOPObfuscatorTest extends BaseTestCase
     {
         $obfuscator = new NOPObfuscator();
         $this->assertEquals($expected, $obfuscator->obfuscate($id));
-        $this->assertEquals($expected, $obfuscator->unobfuscate($id));
+        $this->assertEquals($expected, $obfuscator->deobfuscate($id));
     }
 }

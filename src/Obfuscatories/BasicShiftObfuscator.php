@@ -17,7 +17,7 @@ class BasicShiftObfuscator implements SymmetricObfuscatorInterface
         return $id ^ $this->salt;
     }
 
-    public function unobfuscate(int $id): int
+    public function deobfuscate(int $id): int
     {
         return $id ^ $this->salt;
     }

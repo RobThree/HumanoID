@@ -10,7 +10,7 @@ class NOPObfuscator implements SymmetricObfuscatorInterface
         return $id;
     }
 
-    public function unobfuscate(int $id): int
+    public function deobfuscate(int $id): int
     {
         return $id;
     }

@@ -42,7 +42,7 @@ class MissyElliottObfuscator implements SymmetricObfuscatorInterface
         return $workIt;
     }
 
-    public function unobfuscate(int $id): int
+    public function deobfuscate(int $id): int
     {
         $binaryInt = str_pad(decbin($id), 32, '0', STR_PAD_LEFT);
         $unWorkIt = str_split($binaryInt, 1);

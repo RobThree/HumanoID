@@ -187,7 +187,7 @@ class HumanoID implements HumanoIDInterface
             throw new LookUpFailureException(sprintf('Failed to lookup "%s"', $text));
         }
         // Return calculated ID
-        return $this->obfuscator->unobfuscate($result);
+        return $this->obfuscator->deobfuscate($result);
     }
 
     /**

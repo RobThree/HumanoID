@@ -21,9 +21,9 @@ class BasicShiftObfuscatorTest extends BaseTestCase
     /**
      * @dataProvider provideBasicShiftIds
      */
-    public function testUnobfuscate(int $expected, int $id)
+    public function testDeobfuscate(int $expected, int $id)
     {
         $obfuscator = new BasicShiftObfuscator(42);
-        $this->assertEquals($expected, $obfuscator->unobfuscate($id));
+        $this->assertEquals($expected, $obfuscator->deobfuscate($id));
     }
 }

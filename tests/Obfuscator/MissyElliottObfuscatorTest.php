@@ -21,9 +21,9 @@ class MissyElliottObfuscatorTest extends BaseTestCase
     /**
      * @dataProvider provideMissyShiftIds
      */
-    public function testUnobfuscate(int $expected, int $id)
+    public function testDeobfuscate(int $expected, int $id)
     {
         $obfuscator = new MissyElliottObfuscator();
-        $this->assertEquals($expected, $obfuscator->unobfuscate($id));
+        $this->assertEquals($expected, $obfuscator->deobfuscate($id));
     }
 }
