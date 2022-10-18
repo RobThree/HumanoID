@@ -6,6 +6,8 @@ namespace RobThree\HumanoID;
 
 use RobThree\HumanoID\Exceptions\InvalidArgumentException;
 use RobThree\HumanoID\Exceptions\LookUpFailureException;
+use RobThree\HumanoID\Obfuscatories\NOPObfuscator;
+use RobThree\HumanoID\Obfuscatories\SymmetricObfuscatorInterface;
 
 class HumanoID implements HumanoIDInterface
 {
@@ -43,6 +45,8 @@ class HumanoID implements HumanoIDInterface
 
     private ?WordFormatOption $format;
 
+    private SymmetricObfuscatorInterface $obfuscator;
+
     /**
      * @param array<string, array<array-key, string|mixed>|mixed> $wordSets
      * @param null|array<array-key, string|mixed>                 $categories
@@ -53,7 +57,8 @@ class HumanoID implements HumanoIDInterface
         array $wordSets,
         ?array $categories = null,
         ?string $separator = '-',
-        ?WordFormatOption $format = null
+        ?WordFormatOption $format = null,
+        ?SymmetricObfuscatorInterface $obfuscator = null
     ) {
         // Ensure we have a list of wordsets
         if (count($wordSets) === 0) {
@@ -106,6 +111,8 @@ class HumanoID implements HumanoIDInterface
         $this->separator = $separator ?? '';
 
         $this->format = $format;
+
+        $this->obfuscator = $obfuscator ?? new NOPObfuscator();
     }
 
     /**
@@ -118,7 +125,7 @@ class HumanoID implements HumanoIDInterface
         }
 
         // Initialize value to id value
-        $value = $id;
+        $value = $this->obfuscator->obfuscate($id);
         // Start at last category
         $categoryIndex = count($this->categories) - 1;
         // Array of words we calculated
@@ -180,7 +187,7 @@ class HumanoID implements HumanoIDInterface
             throw new LookUpFailureException(sprintf('Failed to lookup "%s"', $text));
         }
         // Return calculated ID
-        return $result;
+        return $this->obfuscator->deobfuscate($result);
     }
 
     /**
