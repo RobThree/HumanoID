@@ -337,4 +337,3 @@ vendor/
 
 # PHP automated test files
 build
-composer.lock
