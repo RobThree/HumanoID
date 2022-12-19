@@ -116,7 +116,7 @@ We won't go into too much detail, but in essence a tree is created on a per-char
 
 ## General advice
 
-- **Don't** change your wordlist once you go into production. Imagine reassigning or reordering the value of the values `A..F` in the hexadecimal system. It will be very hard, if not impossible, to make this work correctly without resulting in incorrectly converted HumanoIDsss to ID's or causing ambiguous results etc.
+- **Don't** change your wordlist once you go into production. Imagine reassigning or reordering the value of the values `A..F` in the hexadecimal system. It will be very hard, if not impossible, to make this work correctly without resulting in incorrectly converted HumanoIDs to ID's or causing ambiguous results etc.
 - Use large word-lists. *Don't go overboard*, but categories with a handful of words don't help much (*unless* you don't mind either long HumanoIDs.(`red-blue-blue-red-red-blue-funky-monkey` for example) or have some more smaller categories).
 - Whatever wordlist/separator/format you decide on, once you picked it, you're stuck with it (unless you want to break all your HumanoIDs or you'll need to do some (on-the-fly?) conversion.
 - When not using any separator, try to use longer, unique, words that are not contained in other words (so, for example, avoid "`old`, `cold`" or "`expensive`,`inexpensive`").
