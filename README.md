@@ -70,8 +70,8 @@ The `HumanoID` will automatically determine which 'categories' are available. In
 Ofcourse you don't have to use adjectives, colors and animals. It can be anything you want. So, more generalized, you can provide any data structure in the form
 
     [
-        'cateogory1' =>  ['value', 'value', 'value', ...],
-        'cateogory2' =>  ['value', 'value', 'value', ...],
+        'category1' =>  ['value', 'value', 'value', ...],
+        'category2' =>  ['value', 'value', 'value', ...],
         ...
     ]
     
