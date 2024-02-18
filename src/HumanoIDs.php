@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RobThree\HumanoID;
 
+use RobThree\HumanoID\Dictionaries\ZooDictionary;
 use RobThree\HumanoID\Obfuscatories\SymmetricObfuscatorInterface;
 
 final class HumanoIDs
@@ -12,6 +13,8 @@ final class HumanoIDs
     private static ?array $zooGeneratorArgs = null;
     private static ?HumanoID $spaceGenerator = null;
     private static ?array $spaceGeneratorArgs = null;
+    private static HumanoID $spaceGeneratorStatic;
+    private static array $spaceGeneratorStaticArgs;
 
     public static function zooIdGenerator(
         ?string $separator = '-',
@@ -82,6 +85,39 @@ final class HumanoIDs
                     file_get_contents(__DIR__ . '/../data/space-words.json'),
                     true
                 ),
+                null,
+                $separator,
+                $format
+            );
+        }
+
+        return self::$spaceGenerator;
+    }
+
+    public static function spaceIdGeneratorStatic(
+        ?string $separator = '-',
+        ?WordFormatOption $format = null,
+        ?SymmetricObfuscatorInterface $obfuscator = null
+    ): HumanoID {
+        if (self::$spaceGeneratorStatic === null) {
+            self::$spaceGeneratorStaticArgs = func_get_args();
+            self::$spaceGeneratorStatic = new HumanoID(
+                ZooDictionary::dictionary(),
+                null,
+                $separator,
+                $format,
+                $obfuscator
+            );
+        }
+
+        if (self::$spaceGeneratorStaticArgs !== func_get_args()) {
+            trigger_error(
+                "Calling spaceIdGenerator with different arguments will result in a new instance of HumanoID being created each time. " .
+                "Instead consider constructing a new instance of HumanoID directly",
+                E_USER_WARNING
+            );
+            self::$spaceGeneratorStatic = new HumanoID(
+                ZooDictionary::dictionary(),
                 null,
                 $separator,
                 $format
