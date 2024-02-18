@@ -2,7 +2,7 @@
 
 namespace Dictionary;
 
-use RobThree\HumanoID\Dictionaries\Colors;
+use RobThree\HumanoID\Dictionaries\Adjectives\Colors;
 use RobThree\HumanoID\Dictionaries\Space\CelestialBodies;
 use RobThree\HumanoID\Dictionaries\Space\StarAdjectives;
 use RobThree\HumanoID\Dictionaries\Zoo\Animals;
@@ -23,9 +23,13 @@ class CustomDictionaryGeneratorTest extends BaseTestCase
      */
     public function testCanGenerateTheFirstTwoDozenIdsAsVariousFormats($wordFormat = null): void
     {
+        $allColors = [];
+        foreach (Colors::categories() as $colorCategory) {
+            $allColors[] = Colors::{$colorCategory}();
+        }
         $customDictionary = [
             ...StarAdjectives::dictionary(),
-            'colors' => Colors::all(),
+            'colors' => array_merge(...$allColors),
             'animals' => [
                 ...Animals::terrestrial(),
                 ...Animals::amphibians(),

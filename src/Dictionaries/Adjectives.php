@@ -2,32 +2,22 @@
 
 namespace RobThree\HumanoID\Dictionaries;
 
-class Adjectives implements DictionaryInterface
-{
-    public static function dictionary(): array
-    {
-        return [
-            "colors" => static::colors(),
-        ];
-    }
+use RobThree\HumanoID\Dictionaries\Adjectives\Colors;
 
-    public static function all(): array
+class Adjectives extends DictionarySection
+{
+    public static function hasChildren(): bool
     {
-        return [
-            ...static::colors(),
-            ...static::emotionalTone(),
-            ...static::physicalAttributes(),
-            ...static::personalityTraits(),
-            ...static::temporalAttributes(),
-            ...static::usageContext(),
-            ...static::socialContext(),
-            ...static::intensityContext(),
-        ];
+        return true;
     }
 
     public static function colors(): array
     {
-        return Colors::all();
+        // TODO: Reconsider how this should work - maybe not at all?
+        // If we expose the sub sections as methods programmatically, that means
+        // results change as we add new category methods to respective sections too.
+        // return Colors::all();
+        return [];
     }
 
     public static function emotionalTone(): array

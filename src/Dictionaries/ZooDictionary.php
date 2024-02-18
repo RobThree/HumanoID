@@ -2,6 +2,7 @@
 
 namespace RobThree\HumanoID\Dictionaries;
 
+use RobThree\HumanoID\Dictionaries\Adjectives\Colors;
 use RobThree\HumanoID\Dictionaries\Zoo\Animals;
 
 /**

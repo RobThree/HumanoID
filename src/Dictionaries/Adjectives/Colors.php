@@ -1,44 +1,14 @@
 <?php
 
-namespace RobThree\HumanoID\Dictionaries;
+namespace RobThree\HumanoID\Dictionaries\Adjectives;
 
-class Colors implements DictionaryInterface
+use RobThree\HumanoID\Dictionaries\DictionarySection;
+
+class Colors extends DictionarySection
 {
-    public static function dictionary(): array
+    public static function hasChildren(): bool
     {
-        return [
-            "primary" => static::primary(),
-            "secondary" => static::secondary(),
-            "preciousMinerals" => static::preciousMinerals(),
-            "redShades" => static::redShades(),
-            "blueShades" => static::blueShades(),
-            "yellowShades" => static::yellowShades(),
-            "greenShades" => static::greenShades(),
-            "purpleShades" => static::purpleShades(),
-            "neutrals" => static::neutrals(),
-            "fruits" => static::fruits(),
-            "misc" => static::misc(),
-        ];
-    }
-
-    /**
-     * @return array<array-key, string>
-     */
-    public static function all(): array
-    {
-        return [
-            ...static::primary(),
-            ...static::secondary(),
-            ...static::preciousMinerals(),
-            ...static::redShades(),
-            ...static::blueShades(),
-            ...static::yellowShades(),
-            ...static::greenShades(),
-            ...static::purpleShades(),
-            ...static::neutrals(),
-            ...static::fruits(),
-            ...static::misc(),
-        ];
+        return false;
     }
 
     /**
