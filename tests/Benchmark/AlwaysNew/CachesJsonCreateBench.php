@@ -9,6 +9,11 @@ use RobThree\HumanoID\Test\Benchmark\BenchmarkBase;
 
 class CachesJsonCreateBench extends BenchmarkBase {
 
+    /**
+     * @var mixed
+     */
+    private $spaceJson;
+
     public function __construct()
     {
         $this->spaceJson = json_decode(

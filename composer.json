@@ -33,8 +33,13 @@
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "squizlabs/php_codesniffer": "*",
         "vimeo/psalm": "^4.22",
-        "phpbench/phpbench": "^1.2"
+        "symfony/var-dumper": "^5.3|^6.0|^7.0",
+        "symfony/console": "^5.3|^6.0|^7.0",
+        "symfony/finder": "^5.3|^6.0|^7.0"
     },
+    "bin": [
+        "bin/humanoid-dictionary-generate"
+    ],
     "config": {
         "allow-plugins": {
             "infection/extension-installer": true
@@ -42,7 +47,8 @@
     },
     "autoload": {
         "psr-4": {
-            "RobThree\\HumanoID\\": "src/"
+            "RobThree\\HumanoID\\": "src/",
+            "HumanoID\\DictionaryBuilder\\": "builder/"
         }
     },
     "autoload-dev": {

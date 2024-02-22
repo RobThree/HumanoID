@@ -14,5 +14,6 @@
           "subject"
         ]
       }
-    }
-  }
+    },
+    "storage.xml_storage_path": "./build/.phpbench/storage"
+}
